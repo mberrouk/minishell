@@ -25,7 +25,7 @@ void	clean_parss(t_cmd **cmd)
 	tmp = *cmd;
 	while (tmp)
 	{
-		free_double(tmp->cmd);
+		//free_double(tmp->cmd);
 		clean_file(tmp->file);
 		prev = tmp;
 		tmp = tmp->next;

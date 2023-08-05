@@ -6,7 +6,11 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:12:32 by hoakoumi          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/05 11:21:59 by hoakoumi         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/05 09:58:07 by mberrouk         ###   ########.fr       */
+>>>>>>> 2f6ad2abd73a374a8c44b24daa29f5c31569a6f8
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +19,10 @@
 
 void	builtins_main(t_env **env_list, char **line)
 {
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 2f6ad2abd73a374a8c44b24daa29f5c31569a6f8
 	if (ft_strcmp(line[0], "echo") == 0 || ft_strcmp(line[0], "eCho") == 0
 		|| ft_strcmp(line[0], "ECHO") == 0 || ft_strcmp(line[0], "eChO") == 0 )
 		ft_echo(line);

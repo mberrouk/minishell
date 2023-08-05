@@ -6,7 +6,11 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/05 11:28:44 by hoakoumi         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/05 10:12:47 by mberrouk         ###   ########.fr       */
+>>>>>>> 2f6ad2abd73a374a8c44b24daa29f5c31569a6f8
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +59,7 @@ int	main(int ac, char *av[], char *env[])
 	fetch_env(&g_info.g_env, env);
 	while (1)
 	{
+		tmpenv = NULL;
 		line = readline("\033[1;34mminishell$  \033[1;0m");;
 		if (!line)
 			return (errno);
