@@ -263,7 +263,7 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 		return ;
 	//data->env = env;
 	if ((ft_lstsize_s(data->cmd) == 1 && builtin_status(data->cmd) != -1) || 
-		(ft_lstsize_s(data->cmd) == 1 && !data->cmd) )
+		(ft_lstsize_s(data->cmd) == 1) && !data->cmd )
 			builtins_main(&g_info.g_env, data);
 	else
 	{
