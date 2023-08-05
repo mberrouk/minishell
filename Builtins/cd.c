@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:22:14 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/05 11:19:31 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/05 12:39:00 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 #include "../include/shell.h"
 
 
-void cd_home(t_env **env_list, char *new_dir_path)
+
+void cd_home(t_env **env_list, char **new_dir_path)
 {
-    t_cd vars; 
+    char buf[10000];
+    char *dir;
+    t_env *output;  
 
-    vars.dir = getcwd(vars.buf, sizeof(vars.buf));
+    dir = getcwd(buf, sizeof(buf));
 
-    if (new_dir_path != NULL && (ft_strcmp(new_dir_path, "--") == 0 || ft_strcmp(new_dir_path, "~") == 0))
+    if (*new_dir_path != NULL && (ft_strncmp(*new_dir_path, "--", 3) == 0 || ft_strncmp(*new_dir_path, "~",2) == 0))
     {
-        vars.output = searching_key(*env_list, "OLDPWD");
-        if (vars.output == NULL)
+        output = searching_key(*env_list, "OLDPWD");
+        if (output == NULL)
         {
             _print(2,"minishell: cd: OLDPWD not set\n");
             g_info.exit_status = 1;
@@ -32,10 +35,10 @@ void cd_home(t_env **env_list, char *new_dir_path)
         else
         {
             
-            vars.output = searching_key(*env_list, "HOME");
-            set_pwd(env_list, vars.output->val);
-            set_oldpwd(env_list, vars.dir);
-            chdir(vars.output->val);
+            output = searching_key(*env_list, "HOME");
+            set_pwd(env_list, output->val);
+            set_oldpwd(env_list, dir);
+            chdir(output->val);
             g_info.exit_status = 0;
         }
     }
@@ -51,27 +54,28 @@ int  old_erreur(t_env *s)
     return (1);
 }
 
-void cd__(t_env **env_list, char *new_dir_path)
+void cd__(t_env **env_list, char **new_dir_path)
 {
-    t_cd vars;
+
+    t_env *output;
     char *pwd;
     
-    if (new_dir_path != NULL && (strcmp(new_dir_path, "-") == 0))
+    if (*new_dir_path != NULL && (strncmp(*new_dir_path, "-", 2) == 0))
      {
-        vars.output = searching_key(*env_list, "OLDPWD");
-        if (!vars.output->val)
+        output = searching_key(*env_list, "OLDPWD");
+        if (!output->val)
         {
-            old_erreur(vars.output);
+            old_erreur(output);
             return;
         } 
         pwd = getcwd(NULL, 0);
-        if (vars.output->val && chdir(vars.output->val) == 0)
+        if (output->val && chdir(output->val) == 0)
         {
-            set_pwd(env_list, vars.output->val); 
+            set_pwd(env_list, output->val); 
             set_oldpwd(env_list, pwd); 
             free(pwd);
-            vars.output = searching_key(*env_list, "PWD");
-            printf("~%s\n", vars.output->val);
+            output = searching_key(*env_list, "PWD");
+            printf("~%s\n", output->val);
         }
         else
         {
@@ -81,48 +85,53 @@ void cd__(t_env **env_list, char *new_dir_path)
     }
 }
 
-void cd_3(t_env **env_list, char *new_dir_path)
+void cd_3(t_env **env_list, char **new_dir_path)
 {
-    t_cd vars;
+    char buf[10000]; 
     char *pwd;
-    
-    if (new_dir_path != NULL && strcmp(new_dir_path, "-") != 0 &&
-        strcmp(new_dir_path, "~") != 0 && strcmp(new_dir_path, "--") != 0)
+     printf("%s\n",new_dir_path[1]);
+    if (*new_dir_path != NULL && ft_strncmp(new_dir_path[1], "-",2) != 0 &&
+        ft_strncmp(new_dir_path[1], "~", 2) != 0 && strncmp(new_dir_path[1], "--", 3) != 0)
     {    
         pwd = getcwd(NULL, 0);
-        if (chdir(new_dir_path) != 0)
+        if (chdir(*new_dir_path) != 0)
         {
             perror("cd");
             g_info.exit_status = 1;
         }
         else
         {
-            new_dir_path =  getcwd(vars.buf, sizeof(vars.buf));
-            set_pwd(env_list, new_dir_path);
+            *new_dir_path =  getcwd(buf, sizeof(buf));
+            set_pwd(env_list, *new_dir_path);
             set_oldpwd(env_list, pwd);
             free(pwd);
         }         
     }
 }
 
-void ft_cd(t_env **env_list, char *new_dir_path)
+void ft_cd(t_env **env_list, char **new_dir_path)
 {
-    t_cd vars;
-
-    vars.dir = getcwd(vars.buf, sizeof(vars.buf));
-    if (new_dir_path == NULL)
+    char buf[10000];
+    char *dir;
+    t_env *output; 
+    printf("%s\n",*new_dir_path);
+    dir = getcwd(buf, sizeof(buf));
+    if (ft_strcmp(*new_dir_path, "cd") == 0)
     {
-        vars.output = searching_key(*env_list, "HOME");
-        if (vars.output == NULL)
+       //printf("hhhhh\n");
+        output = searching_key(*env_list, "HOME");
+        if (output == NULL)
         {
+           // printf("houda\n");
             _print(2,"minishell: cd: HOME not set\n");
             g_info.exit_status = 1;
         }
-        else if (vars.output != NULL && vars.dir != NULL)
+        else if (output != NULL && dir != NULL)
         {
-            set_pwd(env_list, vars.output->val);
-            chdir(vars.output->val);
-            set_oldpwd(env_list, vars.dir);
+            // printf("hiba\n");
+            set_pwd(env_list, output->val);
+            chdir(output->val);
+            //set_oldpwd(env_list, dir);
         }
     }
     cd_home(env_list, new_dir_path);

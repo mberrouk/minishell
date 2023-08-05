@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:24:19 by mberrouk          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/08/05 09:44:16 by hoakoumi         ###   ########.fr        #
-=======
-#    Updated: 2023/08/05 09:45:39 by mberrouk         ###   ########.fr        #
->>>>>>> 2f6ad2abd73a374a8c44b24daa29f5c31569a6f8
+#    Updated: 2023/08/05 11:49:08 by hoakoumi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +23,8 @@ SRCS =  utils/ft_split.c utils/linked_list_utils.c utils/utils_double_ptr.c util
 		main.c exec_test.c parsing/expansion_analysis.c parsing/expansion_in_doublq.c parsing/expansion_utils.c \
 		parsing/expansion_utils2.c parsing/itoa.c env_process.c ft_printf.c clean_utils.c \
 		Builtins/builtins.c Builtins/pwd.c Builtins/env.c Builtins/echo.c Builtins/exit.c \
-		Builtins/outils_built.c Builtins/unset.c Builtins/cd.c Builtins/outils_buit1.c Builtins/outils_buils2.c Builtins/export.c 
+		Builtins/outils_built.c Builtins/unset.c Builtins/cd.c Builtins/outils_buit1.c Builtins/outils_buils2.c Builtins/export.c \
+
 OBJ = ${SRCS:%.c=%.o}
 
 CC = cc -g #-fsanitize=address -g3 #-Wall -Wextra -Werror  #-lncurses  -L -lreadline -L /Users/mberrouk/homebrew/opt/readline/include/readline -I ~/homebrew/opt/readline/include

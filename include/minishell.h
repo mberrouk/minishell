@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/05 11:31:59 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/05 12:17:19 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
+#include <stdbool.h>
+#include "../include/lexer.h"
 
 typedef struct s_env
 {
@@ -24,6 +26,8 @@ typedef struct s_env
 	int				index;
 	struct s_env		*next;
 }	t_env;
+
+
 
 typedef struct s_da
 {
@@ -56,12 +60,29 @@ typedef struct s_echo
     int k;
 }   t_echo;
 
-typedef struct s_cd
+// typedef struct s_cd
+// {
+//     char buf[10000];
+//     char *dir;
+//     t_env *output;
+// } t_cd;
+
+typedef struct s_file
 {
-    char buf[10000];
-    char *dir;
-    t_env *output;
-} t_cd;
+    SymTok			type;
+	char			*name;
+	int				fd;			/** the file descripti*/
+	struct s_file	*next;
+}	t_file;
+
+typedef struct s_cmd
+{
+    SymTok			type;
+	char			**cmd; 
+	t_file			*file;
+	struct s_cmd	*next;
+}	t_cmd;
+
 
 typedef struct s_unset
 {
@@ -79,8 +100,8 @@ void	ft_echo(char **av);
 void	ft_exit(char **av);
 void	ft_env(t_env *list_env, char **av);
 void	ft_unset(t_env **env_list, char **av);
-void	builtins_main(t_env **env_list, char **line);
-void	ft_cd(t_env **env_list, char *new_dir_path);
+//void	builtins_main(t_env **env_list, char **line);
+void	ft_cd(t_env **env_list, char **new_dir_path);
 void    ft_export(char **av, t_env *env);
 void	ft_putstr_fd(char *s, int fd);
 char	*fstrdup(char *src);
@@ -90,5 +111,5 @@ t_env	*searching_key(t_env *env_list, char *key);
 void    free_env(t_env  *current);
 int     expo(char **av, t_env	*env);
 int     env_len(t_env *env);
-
+void	builtins_main(t_env **env_list, t_cmd *cmd);
 #endif 
