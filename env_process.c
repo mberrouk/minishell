@@ -65,6 +65,7 @@ void	fetch_env(t_env **envlist, char **env)
 		free_double(arg);
 		i++;
 	}
+	//add_node(envlist, new_node(ft_strdup("OLDPWD"), NULL, i));
 }
 
 int getenv_size()

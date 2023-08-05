@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:35:17 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 06:15:29 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/05 09:48:45 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_strlen(char *str)
 
 	len = 0;
 	if (str)
-		while (str[len])
+		while (str && str[len])
 			len++;
 	return (len);
 }
@@ -73,7 +73,7 @@ int	ft_strlcpy(char *dest, char *src, int dstsize)
 
 	i = 0;
 	src_size = ft_strlen(src);
-	if (dstsize > 0)
+	if (src && dstsize > 0)
 	{
 		while (src[i] && i < dstsize - 1)
 		{

@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:12:32 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/05 09:26:34 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/05 09:58:07 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void	builtins_main(t_env **env_list, char **line)
 {
-	line = ft_split(*line, ' ');
 	if (ft_strcmp(line[0], "echo") == 0 || ft_strcmp(line[0], "eCho") == 0
 		|| ft_strcmp(line[0], "ECHO") == 0 || ft_strcmp(line[0], "eChO") == 0 )
 		ft_echo(line);

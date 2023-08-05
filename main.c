@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 09:28:34 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/05 10:09:06 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int ac, char *av[], char *env[])
 		return (1);
 	line = NULL;
 	cmds = NULL;
+	tmpenv = NULL;
 	fetch_env(&g_info.g_env, env);
 	while (1)
 	{
