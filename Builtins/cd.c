@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:22:14 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/05 08:35:24 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:19:31 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void cd__(t_env **env_list, char *new_dir_path)
             return;
         } 
         pwd = getcwd(NULL, 0);
-        if (chdir(vars.output->val) == 0 && vars.output->val)
+        if (vars.output->val && chdir(vars.output->val) == 0)
         {
             set_pwd(env_list, vars.output->val); 
             set_oldpwd(env_list, pwd); 

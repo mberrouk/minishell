@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:22:43 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/05 08:35:45 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:26:12 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "../include/minishell.h"
 #include "../include/parser.h"
 #include "../include/shell.h"
-
-
 
 int	env_len(t_env *env)
 {
@@ -335,6 +333,6 @@ void    ft_export(char **av, t_env *env)
        		}
         	i++;
    		}
-	//export_(av, env);
+	export_(av, env);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/05 08:37:25 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:31:59 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_echo(char **av);
 void	ft_exit(char **av);
 void	ft_env(t_env *list_env, char **av);
 void	ft_unset(t_env **env_list, char **av);
-void	builtins_main(t_env **list, char **av);
+void	builtins_main(t_env **env_list, char **line);
 void	ft_cd(t_env **env_list, char *new_dir_path);
 void    ft_export(char **av, t_env *env);
 void	ft_putstr_fd(char *s, int fd);
@@ -89,5 +89,6 @@ void	set_oldpwd(t_env **envlist, char *dir);
 t_env	*searching_key(t_env *env_list, char *key);
 void    free_env(t_env  *current);
 int     expo(char **av, t_env	*env);
-void	builtins_main(t_env **env_list, char **line);
+int     env_len(t_env *env);
+
 #endif 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:42:34 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 07:58:41 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:41:34 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,13 +217,56 @@ void	cmds(t_cmd *data, int fdi, char **path, char **env)
 
 }
 
+int	ft_lstsize_s(char **lst)
+{
+	int	i;
+
+	i = 0;
+	if (!lst)
+		return (0);
+	while (lst[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
+int	builtin_status(char **str)
+{
+	if (!str)
+		return (-1);
+	if (!ft_strncmp("cd", str[0], 3))
+		return (1);
+	if (!ft_strncmp("pwd", str[0], 4))
+		return (0);
+	if (!ft_strncmp("echo", str[0], 5))
+		return (0);
+	if (!ft_strncmp("exit", str[0], 5))
+		return (1);
+	if (!ft_strncmp("env", str[0], 4))
+		return (0);
+	if (!ft_strncmp("unset", str[0], 6))
+		return (1);
+	if (!ft_strncmp("export", str[0], 7))
+	{
+		if (!str[1])
+			return (0);
+		return (1);
+	}
+	return (-1);
+}
+
 void	exec_cmds(t_cmd *data, int status, char **env)
 {
 
 	if (!data)
 		return ;
 	//data->env = env;
-	//builtins_main(&g_info.g_env, data->cmd);
+	if ((ft_lstsize_s(data->cmd) == 1 && !data->cmd )
+		|| (ft_lstsize_s(data->cmd) == 1 && builtin_status(data->cmd) != -1))
+			builtins_main(&g_info.g_env, data->cmd);
+	else
+	{
 	char **path = find_path(env);
 	if (!path)
 	{
@@ -234,4 +277,5 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 		;
 	status = WEXITSTATUS(status);
 	free_double(path);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:29:44 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/05 08:35:50 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:16:45 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	set_oldpwd(t_env **envlist, char *dir)
 			break ;
 		tmp = tmp->next;
 	}
+	printf("%s\n", tmp->key);
 	free(tmp->val);
 	tmp->val = fstrdup(dir);
 } 
