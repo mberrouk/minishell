@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:22:14 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/06 03:37:54 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/06 15:12:50 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/parser.h"
 #include "../include/shell.h"
-
-
 
 void cd_home(t_env **env_list, char **new_dir_path)
 {

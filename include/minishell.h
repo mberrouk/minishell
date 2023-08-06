@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/05 12:17:19 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/06 18:50:09 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,11 @@ typedef struct s_unset
     t_env *current;
 }   t_unset;
 
+typedef struct s_execu
+{
+	
+}	t_execu;
+
 char	**ft_split(char const *s, char c);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_atoi(const	char	*str);
@@ -112,4 +117,6 @@ void    free_env(t_env  *current);
 int     expo(char **av, t_env	*env);
 int     env_len(t_env *env);
 void	builtins_main(t_env **env_list, t_cmd *cmd);
+int		ft_lstsize_s(char **lst);
+void execution(t_cmd   *cmds, char **env);
 #endif 

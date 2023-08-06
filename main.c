@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/06 03:42:24 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/06 18:52:52 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@ char	**convert_env()
 	return (env);
 }
 
+int	env_lenn(t_cmd *env)
+{
+	int	len;
+
+    len = 0;
+    while (env)
+	{
+		len++;
+		env = (env)->next;
+	}
+    return (len);
+}
+
 int	main(int ac, char *av[], char *env[])
 {
 	(void)av;
@@ -63,8 +76,10 @@ int	main(int ac, char *av[], char *env[])
 		{
 			tmpenv = convert_env();
 			init_parse(&cmds, line, tmpenv);
+			execution(cmds, env);
+			//printf("%d\n", 	env_lenn(cmds));
 			//builtins_main(&g_info.g_env, cmds->cmd);
-			exec_cmds(cmds, 0, env);
+			//exec_cmds(cmds, 0, env);
 		}
 		free(line);
 		free_double(tmpenv);
