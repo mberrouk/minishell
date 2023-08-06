@@ -32,7 +32,7 @@ void	ft_env(t_env *list_env, char **av)
 	if (av[1] !=  NULL)
 	{
 		g_info.exit_status = 127;
-        _print(2,"env: cd: %s : No such file or directory\n", av[1]);
+        _print(2,"env: %s : No such file or directory\n", av[1]);
 		return ;
 	}
 	g_info.exit_status = 0;

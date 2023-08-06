@@ -137,5 +137,6 @@ void ft_cd(t_env **env_list, char **new_dir_path)
     cd_home(env_list, &new_dir_path[1]);
     /**********************************************/
     cd_3(env_list, new_dir_path);
-    g_info.exit_status = 0;            /*(!)*/
+    //g_info.exit_status = 0;            /*(!)*/
+
 }

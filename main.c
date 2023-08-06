@@ -76,10 +76,10 @@ int	main(int ac, char *av[], char *env[])
 		{
 			tmpenv = convert_env();
 			init_parse(&cmds, line, tmpenv);
-			execution(cmds, env);
+			//execution(cmds, env);
 			//printf("%d\n", 	env_lenn(cmds));
 			//builtins_main(&g_info.g_env, cmds->cmd);
-			//exec_cmds(cmds, 0, env);
+			exec_cmds(cmds, 0, env);
 		}
 		free(line);
 		free_double(tmpenv);

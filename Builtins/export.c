@@ -162,7 +162,7 @@ int	len_equal(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i] != '=')
+	while (s[i] && s[i] != '=')
 		i++;
 	return (i);
 }
@@ -222,14 +222,14 @@ int	check_identifier(char *str, int i)
 	int	error;
 
 	error = 0;
-	if (!ft_isalpha(str[i]) && str[i] != '_')
+	if (ft_isalpha(str[i]) || str[i] == '_')
 		error = 1;
 	i++;
 	while (str[i])
 	{
 		if (ft_isalpha(str[i]) || ft_isdigit(str[i]))
 			i++;
-		else if (str[i] == '=' || (str[i] == '+' && str[i + 1] == '='))
+		else if (!str[i] || str[i] == '=' || (str[i] == '+' && str[i + 1] == '='))  /** added !str[i]**/
 			return (1);
 		else
 		{
@@ -240,6 +240,7 @@ int	check_identifier(char *str, int i)
 	if (error == 1)
 	{
 		//ft_error("minishell: export: '", str, "': not a valid identifier", 1);
+		printf("\n error --> %s\n", str);
 		g_info.exit_status = 1;;
 		return (0);
 	}
@@ -265,8 +266,11 @@ int	export_help(char **av, t_env *env, char *value, int i)
 	char	*key;
 	int		x;
 
+
+	//printf("\n--> %s\n", av[1]);
 	if (check_identifier(av[i], 0) && !get_key(env, av[i]))
 	{
+//	printf("\n 1 --> %s\n", av[1]);
 		key = cat_equals(av[i], &x, 0);
 		if (key)
 			value = ft_substr(av[i], len_equal(av[i]) + 1,
@@ -274,15 +278,17 @@ int	export_help(char **av, t_env *env, char *value, int i)
 		else
 			key = ft_strdup(av[i]);
 		if (get_key(env, key))
+		{
 			help(env, key, value, x);
+		}
 		else
 		{
-			export_add(env, key, value);
-			return (0);
+			export_add(env, ft_strdup(key), value);
 		}
 		free(key);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 void	export_(char **av, t_env *env)
@@ -333,6 +339,6 @@ void    ft_export(char **av, t_env *env)
        		}
         	i++;
    		}
-	export_(av, env);
+		export_(av, env);
 	}
 }
