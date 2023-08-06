@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:42:34 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/07 00:32:22 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/07 00:36:44 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,27 +235,39 @@ int	ft_lstsize_s(char **lst)
 
 int	builtin_status(char **str)
 {
-	if (!str)
-		return (-1);
-	if (!ft_strncmp("cd", str[0], 3))
-		return (1);
-	if (!ft_strncmp("pwd", str[0], 4))
+	if (ft_strncmp("cd", str[0], 3) == 0)
 		return (0);
-	if (!ft_strncmp("echo", str[0], 5))
+	if (ft_strncmp("pwd", str[0], 4) == 0)
 		return (0);
-	if (!ft_strncmp("exit", str[0], 5))
-		return (1);
-	if (!ft_strncmp("env", str[0], 4))
+	if (ft_strncmp("echo", str[0], 5) == 0)
 		return (0);
-	if (!ft_strncmp("unset", str[0], 6))
-		return (1);
-	if (!ft_strncmp("export", str[0], 7))
-	{
-		if (!str[1])
-			return (0);
-		return (1);
-	}
+	if (ft_strncmp("exit", str[0], 5) == 0)
+		return (0);
+	if (ft_strncmp("env", str[0], 4) == 0)
+		return (0);
+	if (ft_strncmp("unset", str[0], 6) == 0)
+		return (0);
+	if (ft_strncmp("export", str[0], 7) == 0)
+		return (0);
+		// {
+		// 	if (!str[1])
+		// 		return (0);
+		// 	return (1);
+		// }
 	return (-1);
+}
+
+int size_cmds(t_cmd *cmds)
+{
+    int i;
+    
+    i = 0;
+	while(cmds)
+	{
+		i++;
+		cmds = cmds->next;
+	}
+    return (i);
 }
 
 void	exec_cmds(t_cmd *data, int status, char **env)
