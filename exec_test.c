@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:42:34 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/06 03:42:11 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/07 00:32:22 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,9 @@ void	execute_command(int ifd, int ofd, t_cmd *data, char **cmds, char **path, ch
 			not_found(cmds[0]);
 			exit(127);
 		}
-		if (execve(cmd, cmds, env) == -1)
+		if (builtin_status(data->cmd) != -1)
+			builtins_main(&g_info.g_env, data);
+		else if (execve(cmd, cmds, env) == -1)
 		{
 			puterr(NULL);
 			exit(errno);
@@ -258,20 +260,17 @@ int	builtin_status(char **str)
 
 void	exec_cmds(t_cmd *data, int status, char **env)
 {
-
+	char **path;
+	
 	if (!data)
 		return ;
-
 	//data->env = env;
 	//(ft_lstsize_s(data->cmd) == 1 && (builtin_status(data->cmd) != -1)  (!)
-	if (builtin_status(data->cmd) != -1 || 
-		(ft_lstsize_s(data->cmd) == 1 && !data->cmd))
-	{		
+	if (builtin_status(data->cmd) != -1 && (size_cmds(data) == 1))	
 		builtins_main(&g_info.g_env, data);
-	}
 	else
 	{
-	char **path = find_path(env);
+	path = find_path(env);
 	if (!path)
 	{
 		printf("\n Error : path\n");

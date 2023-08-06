@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:22:43 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/06 15:28:19 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/06 23:17:56 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ int	check_identifier(char *str, int i)
 	int	error;
 
 	error = 0;
-	if (ft_isalpha(str[i]) || str[i] == '_')
+	if (ft_isalpha(str[i]) && str[i] != '_')
 		error = 1;
 	i++;
 	while (str[i])
@@ -240,7 +240,7 @@ int	check_identifier(char *str, int i)
 	if (error == 1)
 	{
 		//ft_error("minishell: export: '", str, "': not a valid identifier", 1);
-		printf("\n error --> %s\n", str);
+		//printf("\n error --> %s\n", str);
 		g_info.exit_status = 1;;
 		return (0);
 	}
