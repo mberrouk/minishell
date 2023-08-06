@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:42:34 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 12:20:05 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/06 03:42:11 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void	cmds(t_cmd *data, int fdi, char **path, char **env)
 				fdo = open(data->file->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 				if (fdo == -1)
 					perror(data->file->name);
-				printf("%d %s\n", fdo, data->file->name);
+				//printf("%d %s\n", fdo, data->file->name);
 			}
 			else if (data->file->type == APPEND_RE)
 			{
@@ -185,7 +185,7 @@ void	cmds(t_cmd *data, int fdi, char **path, char **env)
 			data->file = data->file->next;
 		}
 
-		//printf("----------> %s\n", *data->cmd);
+	
 		if (data->next)
 		{	
 			if (pip_fds[1] != 1)
@@ -261,10 +261,14 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 
 	if (!data)
 		return ;
+
 	//data->env = env;
-	if ((ft_lstsize_s(data->cmd) == 1 && builtin_status(data->cmd) != -1) || 
-		(ft_lstsize_s(data->cmd) == 1) && !data->cmd )
-			builtins_main(&g_info.g_env, data);
+	//(ft_lstsize_s(data->cmd) == 1 && (builtin_status(data->cmd) != -1)  (!)
+	if (builtin_status(data->cmd) != -1 || 
+		(ft_lstsize_s(data->cmd) == 1 && !data->cmd))
+	{		
+		builtins_main(&g_info.g_env, data);
+	}
 	else
 	{
 	char **path = find_path(env);

@@ -53,6 +53,7 @@ void	fetch_env(t_env **envlist, char **env)
 {
 	int		i;
 	char	**arg;
+	t_env	*tmp;
 
 	i = 0;
 	if (!env)
@@ -65,7 +66,22 @@ void	fetch_env(t_env **envlist, char **env)
 		free_double(arg);
 		i++;
 	}
-	//add_node(envlist, new_node(ft_strdup("OLDPWD"), NULL, i));
+	tmp = *envlist;
+	/**  check PWD and remove value in the the first time running program */
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->key, "OLDPWD"))
+		{
+			if (tmp->val)
+				free(tmp->val);
+			tmp->val = NULL;
+			break ;
+		}
+		tmp = tmp->next;
+	}
+	/**   add OLDPWD variable on environment if not exists **/
+	if (!tmp)
+		add_node(envlist, new_node(ft_strdup("OLDPWD"), NULL, i));
 }
 
 int getenv_size()

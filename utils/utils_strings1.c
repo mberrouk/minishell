@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:36:03 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/07/28 17:36:04 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/06 01:18:17 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,14 @@ char	*ft_strdup(char *s1)
 	size_t	size;
 	char	*s;
 
-	size = ft_strlen(s1) + 1;
-	s = (char *)malloc(sizeof(char) * size);
+	size = ft_strlen(s1);
+	s = (char *)malloc(sizeof(char) * (size + 1));
 	if (!s)
 		return (NULL);
-	ft_strlcpy(s, s1, size);
+	if (size)
+		ft_strlcpy(s, s1, size + 1);
+	else
+		*s = '\0';
 	return (s);
 }
 
@@ -83,8 +86,8 @@ int	check_quots(char *str)
 	int	i;
 
 	i = 0;
-//	if (!str)
-//		return (0);
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')

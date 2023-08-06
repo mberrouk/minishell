@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+         #
+#    By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:24:19 by mberrouk          #+#    #+#              #
-#    Updated: 2023/08/05 11:49:08 by hoakoumi         ###   ########.fr        #
+#    Updated: 2023/08/06 03:52:59 by mberrouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS		=	-Wall -Wextra -Werror #-fsanitize=address -g3
 
 IDFLAG		=	-I/Users/hoakoumi/homebrew/opt/readline/include
 

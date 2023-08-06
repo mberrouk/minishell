@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:35:17 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 09:48:45 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/06 01:26:10 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ int	ft_strlen(char *str)
 	int	len;
 
 	len = 0;
-	if (str)
-		while (str && str[len])
-			len++;
+	if (!str || !*str)
+		return (0);
+	while (str && str[len])
+		len++;
 	return (len);
 }
 
