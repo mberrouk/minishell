@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/07 21:56:27 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/08 00:09:59 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void    sigint(int sig)
     write(1, "\n", 1);
     rl_replace_line("", 0);
     rl_on_new_line();
-    rl_redisplay();
+    rl_redisplay(); 
 }
 
 void signals()
