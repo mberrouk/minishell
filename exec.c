@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/07 12:18:15 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:33:47 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,6 @@
 #include <sys/fcntl.h>
 #include <unistd.h>
 #include "include/shell.h"
-void	builtins_main(t_env **env_list, t_cmd *cmds);
-int	builtin_status(char **str)
-{
-	if (!str)
-		return (-1);
-	if (!ft_strncmp("cd", str[0], 3)
-        || !ft_strncmp("pwd", str[0], 4)
-        || !ft_strncmp("echo", str[0], 5)
-        || !ft_strncmp("exit", str[0], 5)
-	    || !ft_strncmp("env", str[0], 4)
-        || !ft_strncmp("unset", str[0], 6)
-        || !ft_strncmp("export", str[0], 7))
-            return (0);
-	return (-1);
-}
-
-void	not_found(char *parm)
-{
-	write(STDERR_FILENO, "minishell: ", 12);
-	if (parm && *parm)
-		write(STDERR_FILENO, parm, ft_strlen(parm));
-	write(STDERR_FILENO, ": command not found\n", 21);
-	free(parm);
-	exit(127);
-}
-
-void	puterr(char *str)
-{
-	if (str)
-	{
-		write(STDERR_FILENO, str, ft_strlen(str));
-		//exit(errno);
-		exit(g_info.exit_status);
-	}
-	else
-	{
-		perror("Error");
-		//exit(errno);
-		exit(g_info.exit_status);
-	}
-}
 
 char	*ft_access(char **paths, char *cmd)
 {
@@ -85,29 +44,6 @@ char	*ft_access(char **paths, char *cmd)
 	return (NULL);
 }
 
-char	**find_path(char **env)
-{
-	char	**paths;
-	int		i;
-	int		j;
-	char	*path;
-
-	i = 0;
-	path = "PATH=";
-	while (env[i])
-	{
-		j = 0;
-		while (path[j] == env[i][j])
-			j++;
-		if (!path[j])
-		{
-			paths = ft_split(&env[i][j], ':');
-			return (paths);
-		}		
-		i++;
-	}
-	return (NULL);
-}
 
 void handle_builtin_commands(t_cmd *data, char **cmds, char **path, char **env)
 {
@@ -296,19 +232,6 @@ void cmds(t_cmd *data, int fd_inp, char **path, char **env)
 }
 
 
-int	ft_lstsize_s(char **lst)
-{
-	int	i;
-
-	i = 0;
-	if (!lst)
-		return (0);
-	while (lst[i])
-	{
-		i++;
-	}
-	return (i);
-}
 
 int size_cmds(t_cmd *cmds)
 {

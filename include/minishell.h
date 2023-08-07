@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/06 18:50:09 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:36:33 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,10 @@ int     expo(char **av, t_env	*env);
 int     env_len(t_env *env);
 void	builtins_main(t_env **env_list, t_cmd *cmd);
 int		ft_lstsize_s(char **lst);
-void execution(t_cmd   *cmds, char **env);
+void	execution(t_cmd   *cmds, char **env);
+int		builtin_status(char **str);
+void	puterr(char *str);
+void	not_found(char *parm);
+char	**find_path(char **env);
+
 #endif 
