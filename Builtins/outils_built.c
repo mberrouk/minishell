@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:15:37 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/05 08:35:55 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/07 22:18:15 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	ft_atoi(const	char	*str)
 	if (str[vars.i])
 		return (-1);
 	if (vars.sig == 1 && vars.r > __LONG_LONG_MAX__)
-		return (-1);
+		return (4);
 	if (vars.sig == -1 && vars.r > __LONG_LONG_MAX__)
-		return (0);
+		return (4);
 	return (vars.r * vars.sig);
 }

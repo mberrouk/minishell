@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/06 18:52:52 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/07 21:56:27 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,23 @@ int	env_lenn(t_cmd *env)
     return (len);
 }
 
+void    sigint(int sig)
+{
+    (void)sig;
+    //g_info.exit_status = 1;
+    write(1, "\n", 1);
+    rl_replace_line("", 0);
+    rl_on_new_line();
+    rl_redisplay();
+}
+
+void signals()
+{
+    //remove_ctrl_c();
+    signal(SIGQUIT, SIG_IGN);
+    signal(SIGINT, sigint);
+}
+
 int	main(int ac, char *av[], char *env[])
 {
 	(void)av;
@@ -67,6 +84,7 @@ int	main(int ac, char *av[], char *env[])
 	fetch_env(&g_info.g_env, env);
 	while (1)
 	{
+		signals();
 		tmpenv = NULL;
 		line = readline("\033[1;34mminishell$  \033[1;0m");;
 		if (!line)

@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:10:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/05 08:35:10 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/07 22:20:51 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ void	ft_exit(char **av)
         exit (255);
     }
     c = ft_atoi(av[1]);
+	if (c == 4)
+	{ 
+		_print(2,"exit\nminishell: exit: %s: numeric argument required\n", av[1]);
+		exit(255);
+	}
 	write(2, "exit\n", 5);
 	exit(c);
 }
