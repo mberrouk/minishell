@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+         #
+#    By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:24:19 by mberrouk          #+#    #+#              #
-#    Updated: 2023/08/06 18:03:06 by hoakoumi         ###   ########.fr        #
+#    Updated: 2023/08/07 04:25:13 by mberrouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ SRCS =  utils/ft_split.c utils/linked_list_utils.c utils/utils_double_ptr.c util
 		utils/utils_strings.c utils/utils_strings1.c parsing/lexer.c parsing/parser.c parsing/parsing_utils.c\
 		main.c exec_test.c parsing/expansion_analysis.c parsing/expansion_in_doublq.c parsing/expansion_utils.c \
 		parsing/expansion_utils2.c parsing/itoa.c env_process.c ft_printf.c clean_utils.c \
-		Builtins/builtins.c Builtins/pwd.c Builtins/env.c Builtins/echo.c Builtins/exit.c  exec.c \
-		Builtins/outils_built.c Builtins/unset.c Builtins/cd.c Builtins/outils_buit1.c Builtins/outils_buils2.c Builtins/export.c \
+		Builtins/builtins.c Builtins/pwd.c Builtins/env.c Builtins/echo.c Builtins/exit.c  \
+		Builtins/outils_built.c Builtins/unset.c Builtins/cd.c Builtins/outils_buit1.c Builtins/outils_buils2.c Builtins/export.c #exec.c
 
 OBJ = ${SRCS:%.c=%.o}
 

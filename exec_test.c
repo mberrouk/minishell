@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:42:34 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/07 01:52:25 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/07 04:24:25 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,7 +272,20 @@ int	builtin_status(char **str)
 	return (-1);
 }
 
-int size_cmds(t_cmd *cmds);
+//int size_cmds(t_cmd *cmds);
+
+int size_cmds(t_cmd *cmds)
+{
+    int i;
+    
+    i = 0;
+	while(cmds)
+	{
+		i++;
+		cmds = cmds->next;
+	}
+    return (i);
+}
 
 void	exec_cmds(t_cmd *data, int status, char **env)
 {

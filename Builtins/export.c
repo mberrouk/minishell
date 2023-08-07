@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:22:43 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/06 23:17:56 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/07 04:52:35 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,12 +167,12 @@ int	len_equal(char *s)
 	return (i);
 }
 
-void	export_add(t_env *env, char *key, char *value)
+void	export_add(char *key, char *value)
 {
 	t_env	*new;
 
 	new = env_new(key, value);
-	envadd_back(&env, new);
+	envadd_back(&g_info.g_env, new);
 }
 
 char	*cat_equals(char *str, int *x, int i)
@@ -230,7 +230,7 @@ int	check_identifier(char *str, int i)
 		if (ft_isalpha(str[i]) || ft_isdigit(str[i]))
 			i++;
 		else if (!str[i] || str[i] == '=' || (str[i] == '+' && str[i + 1] == '='))  /** added !str[i]**/
-			return (1);
+			break ;
 		else
 		{
 			error = 1;
@@ -241,7 +241,7 @@ int	check_identifier(char *str, int i)
 	{
 		//ft_error("minishell: export: '", str, "': not a valid identifier", 1);
 		//printf("\n error --> %s\n", str);
-		g_info.exit_status = 1;;
+		g_info.exit_status = 1;
 		return (0);
 	}
 	return (1);
@@ -267,10 +267,8 @@ int	export_help(char **av, t_env *env, char *value, int i)
 	int		x;
 
 
-	//printf("\n--> %s\n", av[1]);
-	if (check_identifier(av[i], 0) && !get_key(env, av[i]))
+	if (check_identifier(av[i], 0))
 	{
-//	printf("\n 1 --> %s\n", av[1]);
 		key = cat_equals(av[i], &x, 0);
 		if (key)
 			value = ft_substr(av[i], len_equal(av[i]) + 1,
@@ -279,11 +277,12 @@ int	export_help(char **av, t_env *env, char *value, int i)
 			key = ft_strdup(av[i]);
 		if (get_key(env, key))
 		{
-			help(env, key, value, x);
+			
+			help(env, ft_strdup(key), value, x);
 		}
 		else
 		{
-			export_add(env, ft_strdup(key), value);
+			export_add(ft_strdup(key), value);
 		}
 		free(key);
 		return (1);
