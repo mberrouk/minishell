@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 00:09:45 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 00:25:39 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ void	cat_handle_sigint(int sig)
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		/*rl_on_new_line();
+		rl_replace_line("", 0);*/
 	}
 }
 void execute_command(int ifd, int *pip, t_cmd *data, char **cmds, char **path, char **env) 
@@ -129,50 +129,51 @@ void execute_command(int ifd, int *pip, t_cmd *data, char **cmds, char **path, c
         puterr(NULL);
 }
 
-void handle_input_redirection(t_cmd *data, int *fd_inp) 
+void handle_input_redirection(t_cmd *data, t_file *file, int *fd_inp) 
 {
-    if (data->file->type == INPUT_RE)
+    (void)data;
+    if (file->type == INPUT_RE)
     {
         if (*fd_inp != 0)
             close(*fd_inp);
-        *fd_inp = open(data->file->name, O_RDONLY);
+        *fd_inp = open(file->name, O_RDONLY);
         if (*fd_inp == -1)
         {
-            perror(data->file->name);
+            perror(file->name);
             g_info.exit_status = 1;
         }
     }
 }
 
-void handle_output_redirection(t_cmd *data, int *fd_oup)
+void handle_output_redirection(t_cmd *data, t_file *file, int *fd_oup)
 {
-    if (data->file->type == OUTPUT_RE)
+    if (file->type == OUTPUT_RE)
 	{
-		data->type = data->file->type;
+		data->type = file->type;
 		if (*fd_oup != 1)
 			close(*fd_oup);
-		*fd_oup = open(data->file->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		*fd_oup = open(file->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (*fd_oup == -1)
 		{
 			_print(2, "minishell: ");
-			perror(data->file->name);
+			perror(file->name);
 			g_info.exit_status = 1;
 		}
 	}
 }
 
-void handle_append_redirection(t_cmd *data, int *fd_app)
+void handle_append_redirection(t_cmd *data, t_file *file, int *fd_app)
 {
-    if (data->file->type == APPEND_RE)
+    if (file->type == APPEND_RE)
 	{
-		data->type = data->file->type;
+		data->type = file->type;
 		if (*fd_app != -1)
 			close(*fd_app);
-		*fd_app = open(data->file->name, O_APPEND | O_CREAT | O_RDWR);
+		*fd_app = open(file->name, O_APPEND | O_CREAT | O_RDWR);
 		if (*fd_app == -1)
 		{
 			_print(2, "minishell: ");
-			perror(data->file->name);
+			perror(file->name);
 			g_info.exit_status = 1;
 		}
 	}
@@ -180,12 +181,15 @@ void handle_append_redirection(t_cmd *data, int *fd_app)
 
 void open_fd_file(t_cmd *data, int *fd_inp, int *fd_oup, int *fd_app)
 {
-    while (data->file)
+    t_file *tmp;
+
+    tmp = data->file;
+    while (tmp)
     {
-        handle_input_redirection(data, fd_inp);
-        handle_output_redirection(data, fd_oup);
-        handle_append_redirection(data, fd_app);
-        data->file = data->file->next;
+        handle_input_redirection(data, tmp, fd_inp);
+        handle_output_redirection(data, tmp, fd_oup);
+        handle_append_redirection(data, tmp, fd_app);
+        tmp = tmp->next;
     }
 }
 

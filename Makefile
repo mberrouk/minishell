@@ -6,13 +6,13 @@
 #    By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:24:19 by mberrouk          #+#    #+#              #
-#    Updated: 2023/08/07 23:55:59 by mberrouk         ###   ########.fr        #
+#    Updated: 2023/08/08 00:26:41 by mberrouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS		=	-Wall -Wextra -Werror #-fsanitize=address -g3
 
 IDFLAG		=	-I/Users/hoakoumi/homebrew/opt/readline/include
 
