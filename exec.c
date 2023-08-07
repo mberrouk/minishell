@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/07 11:54:31 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:18:15 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,49 +239,62 @@ void open_fd_file(t_cmd *data, int *fd_inp, int *fd_oup, int *fd_app)
     }
 }
 
-void	cmds(t_cmd *data, int fd_inp, char **path, char **env)
+void setup_pipe_fds(int *pip_fds, int fd_oup, int fd_app, int *fd_inp, t_cmd *data, char **path, char **env)
 {
-	int	pip_fds[2];
-	int	fd_oup;
-	int	fd_app = -1;
+    pip_fds[1] = 1; 
+    pip_fds[0] = 0;
 
-	pip_fds[1] = 1; 
-	pip_fds[0] = 0; 
-	while (data != NULL)
-	{
-		fd_oup = 1;
-		if (!data->cmd && !data->file)
-			return ;
-		open_fd_file(data, &fd_inp, &fd_oup, &fd_app);
-		if (data->type == APPEND_RE)
-		{
-			if (fd_oup != 1)
-				close(fd_oup);
-			fd_oup = fd_app;
-		}
-		if (data->next)
-		{	
-			if (pipe(pip_fds) == -1)
-				puterr(NULL);
-			if (fd_oup > 1)
-			{
-				close(pip_fds[1]);
-				pip_fds[1] = fd_oup;
-			}
-		}
-		else
-			pip_fds[1] = fd_oup;
-		execute_command(fd_inp, pip_fds, data, data->cmd, path, env);
-		if (fd_inp != 0)
-			close(fd_inp);
-		if (pip_fds[1] != 1)
-			close(pip_fds[1]);
-		fd_inp = pip_fds[0];
-		data = data->next;
-	}
-	if (fd_inp != 0)
-		close(fd_inp);
+    if (data->type == APPEND_RE)
+    {
+        if (fd_oup != 1)
+            close(fd_oup);
+        fd_oup = fd_app;
+    }
+
+    if (data->next)
+    {
+        if (pipe(pip_fds) == -1)
+            puterr(NULL);
+        if (fd_oup > 1)
+        {
+            close(pip_fds[1]);
+            pip_fds[1] = fd_oup;
+        }
+    }
+    else
+        pip_fds[1] = fd_oup;
+    execute_command(*fd_inp, pip_fds, data, data->cmd, path, env);
+    if (*fd_inp != 0) 
+        close(*fd_inp);
+    if (pip_fds[1] != 1)
+        close(pip_fds[1]);
 }
+
+void execute_commands(t_cmd *data, int fd_inp, char **path, char **env)
+{
+    int pip_fds[2];
+    int fd_oup;
+    int fd_app = -1;
+
+    while (data != NULL)
+    {
+        fd_oup = 1;
+        if (!data->cmd && !data->file)
+            return;
+        open_fd_file(data, &fd_inp, &fd_oup, &fd_app);
+        setup_pipe_fds(pip_fds, fd_oup, fd_app, &fd_inp, data, path , env);
+        fd_inp = pip_fds[0];
+        data = data->next;
+    }
+    if (fd_inp != 0)
+        close(fd_inp);
+}
+
+void cmds(t_cmd *data, int fd_inp, char **path, char **env)
+{
+    execute_commands(data, fd_inp, path, env);
+}
+
 
 int	ft_lstsize_s(char **lst)
 {
