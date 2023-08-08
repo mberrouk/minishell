@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 18:39:49 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/08 23:50:27 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,20 @@ void	execute_command(int ifd, int *pip, t_cmd *data, char **cmds, char **path, c
 		puterr(NULL);
 }
 
-void	open_fd_file(t_cmd *data, int *fd_inp, int *fd_oup, int *fd_app)
+int	open_fd_file(t_cmd *data, int *fd_inp, int *fd_oup, int *fd_app)
 {
 	t_file	*tmp;
 
 	tmp = data->file;
 	while (tmp)
 	{
-		handle_input_redirection(data, tmp, fd_inp);
-		handle_output_redirection(data, tmp, fd_oup);
-		handle_append_redirection(data, tmp, fd_app);
+		if (handle_input_redirection(data, tmp, fd_inp))
+			return (1);
+		if (handle_output_redirection(data, tmp, fd_oup))
+			return (1);
+		if (handle_append_redirection(data, tmp, fd_app))
+			return (1);
 		tmp = tmp->next;
 	}
+	return (0);
 }

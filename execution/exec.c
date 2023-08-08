@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 23:39:21 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 23:53:08 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,14 @@ void	execute_commands(t_cmd *data, int fd_inp, char **path, char **env)
 		fd_oup = 1;
 		if (!data->cmd && !data->file)
 			return ;
-		open_fd_file(data, &fd_inp, &fd_oup, &fd_app);
+		if (open_fd_file(data, &fd_inp, &fd_oup, &fd_app))
+		{
+			if (fd_inp > 0)
+				close(fd_inp);
+			fd_inp = 0;
+			data = data->next;
+			continue ;
+		}
 		setup_pipe_fds(pip_fds, fd_oup, fd_app, &fd_inp, data, path , env);
 		fd_inp = pip_fds[0];
 		data = data->next;

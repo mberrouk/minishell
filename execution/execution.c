@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 16:58:28 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/08 23:48:04 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../include/shell.h"
 #include "../include/minishell.h"
 
-void	handle_input_redirection(t_cmd *data, t_file *file, int *fd_inp)
+int	handle_input_redirection(t_cmd *data, t_file *file, int *fd_inp)
 {
 	(void)data;
 	if (file->type == INPUT_RE)
@@ -27,11 +27,13 @@ void	handle_input_redirection(t_cmd *data, t_file *file, int *fd_inp)
 		{
 			perror(file->name);
 			g_info.exit_status = 1;
+			return (1);
 		}
 	}
+	return (0);
 }
 
-void	handle_output_redirection(t_cmd *data, t_file *file, int *fd_oup)
+int	handle_output_redirection(t_cmd *data, t_file *file, int *fd_oup)
 {
 	if (file->type == OUTPUT_RE)
 	{
@@ -44,11 +46,13 @@ void	handle_output_redirection(t_cmd *data, t_file *file, int *fd_oup)
 			_print(2, "minishell: ");
 			perror(file->name);
 			g_info.exit_status = 1;
+			return (1);
 		}
 	}
+	return (0);
 }
 
-void	handle_append_redirection(t_cmd *data, t_file *file, int *fd_app)
+int	handle_append_redirection(t_cmd *data, t_file *file, int *fd_app)
 {
 	if (file->type == APPEND_RE)
 	{
@@ -61,8 +65,10 @@ void	handle_append_redirection(t_cmd *data, t_file *file, int *fd_app)
 			_print(2, "minishell: ");
 			perror(file->name);
 			g_info.exit_status = 1;
+			return (1);
 		}
 	}
+	return (0);
 }
 
 void	handle_builtin_commands(t_cmd *data, char **cmds, char **path, char **env)
