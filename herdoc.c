@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:38:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 01:52:28 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 02:45:34 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_doc_sigint(int signal)
 	exit(1);
 }
 
-void handle_append_herdoc(t_cmd *data, char *delm)
+void handle_append_herdoc(t_cmd *data, char *delm, char **env)
 {
     pid_t pid;
     char  *line;
@@ -44,6 +44,7 @@ void handle_append_herdoc(t_cmd *data, char *delm)
                     free(line);
                     break ;
                 }
+                line = expan_in_dquots(line, env);
                 _print(tab[1], line);
 	            _print(tab[1], "\n");
 	            free(line);
@@ -55,7 +56,7 @@ void handle_append_herdoc(t_cmd *data, char *delm)
     }
     else
     {
-        wait(0);
+        wait(0);      /** ! status **/
 	    close(tab[1]);
         if (data->input > 0)
             close(data->input);
@@ -63,7 +64,7 @@ void handle_append_herdoc(t_cmd *data, char *delm)
     }
 }
 
-void    open_doc(t_cmd *cmd)
+void    open_doc(t_cmd *cmd, char **env)
 {
     t_file  *file;
     
@@ -79,10 +80,9 @@ void    open_doc(t_cmd *cmd)
                 cmd->input = -1;
             }
             else if (file->type == HERE_DOC)
-                handle_append_herdoc(cmd, file->name);
+                handle_append_herdoc(cmd, file->name, env);
             file = file->next;
         }
-        printf("%d\n", cmd->input);
         cmd = cmd->next;    
     }
 

@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 01:53:12 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 02:44:29 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <sys/fcntl.h>
 #include <unistd.h>
 #include "include/shell.h"
-void    open_doc(t_cmd *cmd);
+void    open_doc(t_cmd *cmd, char **env);
 char	*ft_access(char **paths, char *cmd)
 {
 	char	*new;
@@ -279,7 +279,7 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 	else
 	{
 		path = find_path(env);
-        open_doc(data);
+        open_doc(data, env);
 		cmds(data, 0, path, env);
 		while (wait(&status) > 0)
 			;
