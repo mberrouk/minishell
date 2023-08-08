@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 00:25:39 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 01:53:12 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <sys/fcntl.h>
 #include <unistd.h>
 #include "include/shell.h"
-
+void    open_doc(t_cmd *cmd);
 char	*ft_access(char **paths, char *cmd)
 {
 	char	*new;
@@ -217,6 +217,12 @@ void setup_pipe_fds(int *pip_fds, int fd_oup, int fd_app, int *fd_inp, t_cmd *da
     }
     else
         pip_fds[1] = fd_oup;
+    if (data->input > 0)
+    {
+        if(*fd_inp > 0)
+            close(*fd_inp);
+        *fd_inp = data->input;
+    }
     execute_command(*fd_inp, pip_fds, data, data->cmd, path, env);
     if (*fd_inp != 0) 
         close(*fd_inp);
@@ -273,6 +279,7 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 	else
 	{
 		path = find_path(env);
+        open_doc(data);
 		cmds(data, 0, path, env);
 		while (wait(&status) > 0)
 			;

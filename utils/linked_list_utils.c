@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:15 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/03 06:27:09 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 01:04:14 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_cmd	*parser_lstnew(void *content)
 	new->next = NULL;
 	new->cmd = content;
 	new->type = SIMPLE_CMD;
+	new->input = -1;
 	new->file = NULL;
 	return (new);
 }
