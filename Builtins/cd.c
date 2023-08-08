@@ -90,19 +90,20 @@ void cd__(t_env **env_list, char **new_dir_path)
     }
 }
 
-void cd_3(t_env **env_list, char **new_dir_path)
+void cd_3(t_env **env_list, char **cmds)
 {
     //char buf[10000]; 
     char *dir_path;
     char *pwd;
     
- if (*new_dir_path != NULL && ft_strncmp(*new_dir_path, "-",2) != 0 &&
-        ft_strncmp(*new_dir_path, "~", 2) != 0 && strncmp(*new_dir_path, "--", 3) != 0)
+ if (*cmds != NULL && ft_strncmp(*cmds, "-",2) != 0 &&
+        ft_strncmp(*cmds, "~", 2) != 0 && strncmp(*cmds, "--", 3) != 0)
     {    
         pwd = getcwd(NULL, 0);
-        if (chdir(*new_dir_path) != 0)
+        if (chdir(*cmds) != 0)
         {
-            perror("cd");
+            _print(2, "minishell: cd: %s: ", *cmds);
+			perror(NULL);
             g_info.exit_status = 1;
         }
         else
