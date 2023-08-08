@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:22:43 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/07 04:52:35 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 03:28:52 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,7 +321,7 @@ void    ft_export(char **av, t_env *env)
     	{
 			if (av[i][0] >= '0' && av[i][0] <= '9')
     		{
-        		_print(2,"minishell: unset: '%s' not a valid identifier\n", av[i]);
+        		_print(2,"minishell: export: '%s' not a valid identifier\n", av[i]);
         		g_info.exit_status = 1;
         		break;
     		}
@@ -330,7 +330,7 @@ void    ft_export(char **av, t_env *env)
         	{
             	if (av[i][j] == ' ')
             	{
-                	_print(2,"minishell: unset: '%s' not a valid identifier\n", av[i]);
+                	_print(2,"minishell: export: '%s' not a valid identifier\n", av[i]);
                 	g_info.exit_status = 1;
                 	break;
             	}
