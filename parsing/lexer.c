@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:22:38 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/08 18:54:19 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/08 23:29:43 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ int	hold_arg(char *line, t_lexer *ptr)
 		if (!flg && (line[i] == '>' || line[i] == '<' || line[i] == '|'
 				|| ((line[i] >= 9 && line[i] <= 13) || line[i] == ' ')))
 			break ;
-		ptr->arg = ft_realloc(ptr->arg, line[i]);
-		i++;
+		ptr->arg = ft_realloc(ptr->arg, line[i++]);
 	}
 	return (i);
 }

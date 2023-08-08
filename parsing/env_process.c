@@ -31,23 +31,10 @@ void	add_node(t_env **lst, t_env *new)
 	tmp->next = new;
 }
 
-void	fetch_env(t_env **envlist, char **env)
+void	check_pwd(t_env **envlist, int i)
 {
-	int		i;
-	char	**arg;
 	t_env	*tmp;
 
-	i = 0;
-	if (!env)
-		return ;
-	while (env[i])
-	{
-		arg = ft_split(env[i], '=');
-		if (arg)
-			add_node(envlist, new_node(ft_strdup(arg[0]), ft_strdup(arg[1]), i));
-		free_double(arg);
-		i++;
-	}
 	tmp = *envlist;
 	while (tmp)
 	{
@@ -64,7 +51,27 @@ void	fetch_env(t_env **envlist, char **env)
 		add_node(envlist, new_node(ft_strdup("OLDPWD"), NULL, i));
 }
 
-int getenv_size()
+void	fetch_env(t_env **envlist, char **env)
+{
+	int		i;
+	char	**arg;
+
+	i = 0;
+	if (!env)
+		return ;
+	while (env[i])
+	{
+		arg = ft_split(env[i], '=');
+		if (arg)
+			add_node(envlist, new_node(ft_strdup(arg[0])\
+			, ft_strdup(arg[1]), i));
+		free_double(arg);
+		i++;
+	}
+	check_pwd(envlist, i);
+}
+
+int	getenv_size(void)
 {
 	t_env	*tmp;
 	int		len;
@@ -76,5 +83,5 @@ int getenv_size()
 		len++;
 		tmp = tmp->next;
 	}
-	return (len);	
+	return (len);
 }
