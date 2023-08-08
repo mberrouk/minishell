@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 03:31:45 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 07:22:56 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:56:22 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../include/shell.h"
 
-t_file *new_file(SymTok	type, char *name)
+t_file	*new_file(SymTok	type, char *name)
 {
 	t_file	*new;
 
@@ -87,8 +86,6 @@ t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env)
 		ptr->arg = handl_quots(ptr->arg);
 	if (!(ptr->arg))
 	{
-		/** dont check it her !?  **/
-		//printf("ambiguous redirect\n");
 		clean_parss(head);
 		return (0x00);
 	}
@@ -119,10 +116,9 @@ t_lexer	*parse_lexer_data(t_cmd **head, t_lexer *ptr, t_cmd *cmd, char **env)
 		clean_parss(head);
 		return (0x00);
 	}
-    ptr->sym = token;
+	ptr->sym = token;
     return (hold_args(head, ptr, tmp, env));
 }
-
 
 void	init_parse(t_cmd **cmd, char *line, char *env[])
 {

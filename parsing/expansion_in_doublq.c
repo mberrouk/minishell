@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_in_doublq.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 06:58:18 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 07:03:52 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:57:11 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
-int skip_dollar(char **value, char *arg);
+
 int	not_expand(char **value, char *arg)
 {
 	int len;

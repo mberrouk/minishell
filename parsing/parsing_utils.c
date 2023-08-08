@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 05:56:26 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 06:42:54 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:54:40 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*get_var(char *var, char **env)
 	int		len;
 	char	*value;
 
-    j = 0;
+	j = 0;
 	len = ft_strlen(var);
 	value = NULL;
 	while (env[j])

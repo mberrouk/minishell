@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:22:38 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/03 10:58:28 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:54:19 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,3 @@ void	lexical_analysis(char *line, t_lexer **lst)
 			i += hold_arg(&line[i], ptr);
 	}
 }
-

@@ -1,13 +1,5 @@
-#include "./include/shell.h"
+#include "../include/shell.h"
 
-/**
- * new_node - Creates a new node for the environment list
- * @key: The key for the environment variable
- * @val: The value for the environment variable
- * @idx: The index of the environment variable
- *
- * Return: A pointer to the newly created node, or NULL on failure
- */
 t_env	*new_node(char *key, char *val, int idx)
 {
 	t_env	*new;
@@ -22,11 +14,6 @@ t_env	*new_node(char *key, char *val, int idx)
 	return (new);
 }
 
-/**
- * add_node - Adds a node to the end of the environment list
- * @lst: A pointer to the head of the environment list
- * @new: A pointer to the node to be added
- */
 void	add_node(t_env **lst, t_env *new)
 {
 	t_env	*tmp;
@@ -44,11 +31,6 @@ void	add_node(t_env **lst, t_env *new)
 	tmp->next = new;
 }
 
-/**
- * fetch_env - Fetches the environment variables and creates a linked list
- * @envlist: A pointer to the head of the list
- * @env: The array of environment variables
- */
 void	fetch_env(t_env **envlist, char **env)
 {
 	int		i;
@@ -67,7 +49,6 @@ void	fetch_env(t_env **envlist, char **env)
 		i++;
 	}
 	tmp = *envlist;
-	/**  check PWD and remove value in the the first time running program */
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, "OLDPWD"))
@@ -79,7 +60,6 @@ void	fetch_env(t_env **envlist, char **env)
 		}
 		tmp = tmp->next;
 	}
-	/**   add OLDPWD variable on environment if not exists **/
 	if (!tmp)
 		add_node(envlist, new_node(ft_strdup("OLDPWD"), NULL, i));
 }

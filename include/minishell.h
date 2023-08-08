@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 00:58:13 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:51:30 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,26 @@ int		builtin_status(char **str);
 void	puterr(char *str);
 void	not_found(char *parm);
 char	**find_path(char **env);
-
+void	handle_input_redirection(t_cmd *data, t_file *file, int *fd_inp);
+void	handle_output_redirection(t_cmd *data, t_file *file, int *fd_oup);
+void	handle_append_redirection(t_cmd *data, t_file *file, int *fd_app);
+char	*ft_access(char **paths, char *cmd);
+void	handle_builtin_commands(t_cmd *data, char **cmds, char **path, char **env);
+void	setup_pipes(int ifd, int *pip);
+void	open_doc(t_cmd *cmd, char **env);
+void	execute_command(int ifd, int *pip, t_cmd *data, char **cmds, char **path, char **env);
+void	open_fd_file(t_cmd *data, int *fd_inp, int *fd_oup, int *fd_app);
+void	cd_3(t_env **env_list, char **cmds);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+char	*cat_equals(char *str, int *x, int i);
+void	export_add(char *key, char *value);
+int		len_equal(char *s);
+char	*come_max(t_env *env);
+int		env_len(t_env *env);
+void	sort_export(t_env *env, int indice, int size);
+void	print(t_env *env, t_env *tmp, int size);
+void	help(t_env *tmp, char *key, char *value, int x);
+void	envadd_back(t_env **lst, t_env *new);
+t_env	*env_new(char *s1, char *s2);
 #endif 

@@ -1,4 +1,4 @@
-#include "./include/shell.h"
+#include "../include/shell.h"
 
 void	clean_file(t_file *file)
 {
@@ -48,4 +48,3 @@ void	clean_lexer(t_lexer *data)
 	}
 	data = NULL;
 }
-

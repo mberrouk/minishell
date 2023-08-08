@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outils_buils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:29:44 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/06 03:45:22 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:57:37 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_env	*searching_key(t_env *env_list, char *key)
 
 void	set_oldpwd(t_env **envlist, char *dir)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = *envlist;
 	while (tmp)
@@ -38,11 +38,11 @@ void	set_oldpwd(t_env **envlist, char *dir)
 	}
 	free(tmp->val);
 	tmp->val = fstrdup(dir);
-} 
+}
 
 void	set_pwd(t_env **envlist, char *dir)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = *envlist;
 	while (tmp)
@@ -53,4 +53,4 @@ void	set_pwd(t_env **envlist, char *dir)
 	}
 	free(tmp->val);
 	tmp->val = fstrdup(dir);
-} 
+}
