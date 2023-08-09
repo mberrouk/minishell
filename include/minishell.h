@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 21:05:55 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 22:13:13 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_exec
 void	cat_handle_sigint(int sig);
 char	**ft_split(char const *s, char c);
 int		ft_strcmp(const char *s1, const char *s2);
-size_t		ft_atoi(const	char	*str);
+size_t	ft_atoi(const	char	*str);
 void	ft_env(t_env *list_env, char **av);
 void	pwd(void);
 void	ft_echo(char **av);
@@ -138,9 +138,9 @@ void	help(t_env *tmp, char *key, char *value, int x);
 void	envadd_back(t_env **lst, t_env *new);
 t_env	*env_new(char *s1, char *s2);
 char	*pars_expan(t_lexer *data, char **env);
-int	export_help(char **av, t_env *env, char *value, int i);
+int		export_help(char **av, t_env *env, char *value, int i);
 t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env);
-int	old_erreur(t_env *s, int flag);
+int		old_erreur(t_env *s, int flag);
 void	cd__(t_env **env_list, char **new_dir_path);
-int	chhe(char *av, char *par);
+int		chhe(char *av, char *par);
 #endif 
