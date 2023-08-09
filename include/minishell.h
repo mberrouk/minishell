@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 04:04:15 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 21:05:55 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,5 @@ int	export_help(char **av, t_env *env, char *value, int i);
 t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env);
 int	old_erreur(t_env *s, int flag);
 void	cd__(t_env **env_list, char **new_dir_path);
-int	chhe(char **av, char *par);
+int	chhe(char *av, char *par);
 #endif 

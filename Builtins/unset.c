@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:24:30 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 04:05:47 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 21:07:32 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	ft_unset(t_env **env_list, char **av)
 		g_info.exit_status = 0;
 		return ;
 	}
-	else if (chhe(av, "unset") == -1)
-		return ;
+	// else if (chhe(av, "unset") == -1)
+	// 	return ;
 	check(env_list, av);
 	g_info.exit_status = 0;
 }
