@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:32:14 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/07 12:33:52 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 04:19:25 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/fcntl.h>
 #include <unistd.h>
-#include "include/shell.h"
+#include "../include/shell.h"
 
 int	builtin_status(char **str)
 {
-	if (!str)
+	if (!str || !*str)
 		return (-1);
 	if (!ft_strncmp("cd", str[0], 3)
-        || !ft_strncmp("pwd", str[0], 4)
-        || !ft_strncmp("echo", str[0], 5)
-        || !ft_strncmp("exit", str[0], 5)
-	    || !ft_strncmp("env", str[0], 4)
-        || !ft_strncmp("unset", str[0], 6)
-        || !ft_strncmp("export", str[0], 7))
-            return (0);
+		|| !ft_strncmp("pwd", str[0], 4)
+		|| !ft_strncmp("echo", str[0], 5)
+		|| !ft_strncmp("exit", str[0], 5)
+		|| !ft_strncmp("env", str[0], 4)
+		|| !ft_strncmp("unset", str[0], 6)
+		|| !ft_strncmp("export", str[0], 7))
+		return (0);
 	return (-1);
 }
 
@@ -44,17 +44,14 @@ void	puterr(char *str)
 	if (str)
 	{
 		write(STDERR_FILENO, str, ft_strlen(str));
-		//exit(errno);
 		exit(g_info.exit_status);
 	}
 	else
 	{
 		perror("Error");
-		//exit(errno);
 		exit(g_info.exit_status);
 	}
 }
-
 
 char	**find_path(char **env)
 {

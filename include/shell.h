@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:25 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 08:15:16 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:57:33 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@
 # include <readline/history.h>
 
 # include "lexer.h"
-# include "parser.h"
 # include "minishell.h"
-
 
 /**
  * utils_strings.c
@@ -83,7 +81,7 @@ char	*ft_strchr(char *s, int c);
 /**
  * utils_double_ptr.c
  */
-char    **join_double(char **fir, char *last);
+char	**join_double(char **fir, char *last);
 int		double_len(char **ptr);
 
 /**
@@ -138,12 +136,12 @@ t_env	*new_node(char *key, char *val, int idx);
 void	add_node(t_env **lst, t_env *new);
 void	fetch_env(t_env **envlist, char **env);
 void	printf_env(t_env *list_env);
-int     getenv_size(void);
+int		getenv_size(void);
 
 /**
  * ft_printf.c
  */
-void _print(int fd, char *str, ...);
+void	_print(int fd, char *str, ...);
 
 /**
  * clean_utils.c
@@ -151,5 +149,6 @@ void _print(int fd, char *str, ...);
 void	clean_file(t_file *file);
 void	clean_parss(t_cmd **cmd);
 void	clean_lexer(t_lexer *data);
-
+int		skip_dollar(char **value, char *arg);
+char	**ultra_split(char *str, char *charset);
 #endif

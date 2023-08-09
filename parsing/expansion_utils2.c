@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 00:21:04 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 06:45:26 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:34:00 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,19 @@ int	skip_dollar(char **value, char *arg)
 {
 	int	i;
 
-    i = 0;
+	i = 0;
 	while (arg[i] == '$')
 	{
 		if (i && !((i + 1) % 2))
 			*value = ft_strjoin(*value, ft_strdup("$$"));
 		else if (!arg[i + 1] || sp_stay(arg[i + 1]))
-			*value =  ft_realloc(*value, '$');
+			*value = ft_realloc(*value, '$');
 		i++;
 	}
-
 	return (i);
 }
 
-int check_after_skip(char **value, char *arg, char sep, int *i)
+int	check_after_skip(char **value, char *arg, char sep, int *i)
 {
 	if (sep == '$' && (arg[*i] == '\'' || arg[*i] == '\"'))
 		return (1);

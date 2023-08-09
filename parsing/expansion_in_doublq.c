@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_in_doublq.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 06:58:18 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/05 07:03:52 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:35:02 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
-int skip_dollar(char **value, char *arg);
+
 int	not_expand(char **value, char *arg)
 {
-	int len;
+	int	len;
 
 	len = len_to_spchar(arg);
-    *value = ft_strjoin(*value, ft_substr(arg, 0, len));
+	*value = ft_strjoin(*value, ft_substr(arg, 0, len));
 	return (len);
 }
 
@@ -32,52 +32,52 @@ int	expand_it(char **value, char *arg, char **env)
 
 int	handl_cases(char **value, char *arg, int ndol)
 {
-	int i;
-	int	len;
-	(void)ndol;
+	int		i;
+	int		len;
 
+	(void)ndol;
 	i = 0;
 	if (arg[i] == '?')
-		*value = ft_strjoin(*value, ft_itoa(g_info.exit_status)); 
-    if (sp_remove(arg[i]) && (arg[i] != '\'' && arg[i] != '\"') && arg[i] != '$')
-        i++;
-    else
-    {
+		*value = ft_strjoin(*value, ft_itoa(g_info.exit_status));
+	if (sp_remove(arg[i]) && (arg[i] != '\'' && arg[i] != '\"') \
+	&& arg[i] != '$')
+		i++;
+	else
+	{
 		if ((arg[i] == '\"' || arg[i] == '\''))
-			*value = ft_realloc(*value, arg[i - 1]); 
+			*value = ft_realloc(*value, arg[i - 1]);
 		len = len_to_spchar(arg);
-        *value = ft_strjoin(*value, ft_substr(arg, i, len));
+		*value = ft_strjoin(*value, ft_substr(arg, i, len));
 		i += len;
 	}
 	return (i);
 }
 
-char *expan_in_dquots(char *arg, char **env)
+char	*expan_in_dquots(char *arg, char **env)
 {
-    int     i;
-    char    *value;
-    int     ndol;
-    
-    i = 0;
-    value = NULL;
-    while (arg[i])
-    {
-        while (arg[i] != '$' && arg[i])
+	int		i;
+	char	*value;
+	int		ndol;
+
+	i = 0;
+	value = NULL;
+	while (arg[i])
+	{
+		while (arg[i] != '$' && arg[i])
 			value = ft_realloc(value, arg[i++]);
-        ndol = skip_dollar(&value, &arg[i]);
+		ndol = skip_dollar(&value, &arg[i]);
 		i += ndol;
-        if (ndol && ndol % 2 == 0)
+		if ((ndol && ndol % 2 == 0)
+			|| (i && arg[i - 1] == '$' && check_sp_char(arg[i])))
 		{
-			i += not_expand(&value, &arg[i]);
-			continue;
+			if (ndol && ndol % 2 == 0)
+				i += not_expand(&value, &arg[i]);
+			else
+				i += handl_cases(&value, &arg[i], ndol);
+			continue ;
 		}
-		else if (i && arg[i - 1] == '$' && check_sp_char(arg[i]))
-        {
-			i += handl_cases(&value, &arg[i], ndol);
-			continue;
-        }
 		i += expand_it(&value, &arg[i], env);
 	}
 	free(arg);
-    return (value);
+	return (value);
 }
