@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/09 01:05:34 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 04:36:49 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	sigint(int sig)
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	rl_redisplay();
+	//rl_redisplay();
 }
 
 void	signals(void)

@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 23:48:04 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 04:21:46 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void	handle_builtin_commands(t_cmd *data, char **cmds, char **path, char **env)
 {
 	char	*cmd;
 
-	if (builtin_status(data->cmd) != -1)
+	if (cmds && *cmds && builtin_status(data->cmd) != -1)
 	{
 		builtins_main(&g_info.g_env, data);
 		exit(0);
 	}
-	else
+	else if (cmds && *cmds)
 	{
 		if (cmds && cmds[0] && (cmds[0][0] == '/' || cmds[0][0] == '.'))
 			cmd = cmds[0];
@@ -96,6 +96,10 @@ void	handle_builtin_commands(t_cmd *data, char **cmds, char **path, char **env)
 			puterr(NULL);
 			exit(g_info.exit_status);
 		}
+	}
+	else
+	{
+		exit(0);
 	}
 }
 

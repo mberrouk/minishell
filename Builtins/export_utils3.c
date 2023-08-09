@@ -3,17 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:55:38 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 02:11:46 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 04:04:02 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/shell.h"
 
-int	chhe(char **av)
+int	err_msg_inden(char *av, char *par)
+{
+	_print(2, "minishell: %s: '%s' not a valid identifier\n", par, av);
+	g_info.exit_status = 1;
+	return (-1);
+}
+
+int	chhe(char **av, char *par)
 {
 	int	i;
 	int	j;
@@ -22,24 +29,13 @@ int	chhe(char **av)
 	i = 1;
 	while (av[i])
 	{
-		if (av[i][0] >= '0' && av[i][0] <= '9')
-		{
-			_print(2, "minishell: export: '%s' not a valid identifier\n", av[i]);
-			g_info.exit_status = 1;
-			return (-1);
-			break ;
-		}
+		if (check_sp_char(*av[i]))
+			return (err_msg_inden(av[i], par));
 		j = 0;
 		while (av[i][j] && av[i][j] != '=')
 		{
-			if (av[i][j] == ' ' && av[i][j] != '=')
-			{
-				_print(2, "minishell: export: '%s' not a\
-					valid identifier\n", av[i]);
-				g_info.exit_status = 1;
-				return (-1);
-				break ;
-			}
+			if (sp_at_end(av[i][j]))
+				return (err_msg_inden(av[i], par));
 			j++;
 		}
 		i++;
@@ -74,7 +70,7 @@ void	ft_export(char **av, t_env *env)
 	}
 	else
 	{
-		if (chhe(av) == 0)
+		if (chhe(av, "export") == 0)
 			export_(av, env);
 	}
 }

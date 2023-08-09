@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 00:33:45 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 04:25:32 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,6 @@ char	*ft_access(char **paths, char *cmd)
 	return (NULL);
 }
 
-void	execute_child(t_exec *fd, int *pip, t_cmd *data, char **cmds)
-{
-	setup_pipes(fd->fd_inp, pip);
-	handle_builtin_commands(data, cmds, fd->path, fd->env);
-}
-
 void	cat_handle_sigint(int sig)
 {
 	if (sig == SIGINT)
@@ -60,7 +54,28 @@ void	cat_handle_sigint(int sig)
 	}
 }
 
-void	execute_command(t_exec *fd, int *pip, t_cmd *data, char **cmds)
+void	manage_fd(t_exec *fd, t_cmd *data, int *pip)
+{
+	if (fd->fd_oup > 1)
+	{
+		close(pip[1]);
+		pip[1] = fd->fd_oup;
+	}
+	if (data->type == APPEND_RE)
+	{
+		if (fd->fd_oup != 1)
+			close(fd->fd_oup);
+		fd->fd_oup = fd->fd_app;
+	}
+	if (data->input > 0)
+	{
+		if (fd->fd_inp > 0)
+			close(fd->fd_inp);
+		fd->fd_inp = data->input;
+	}
+}
+
+void	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds)
 {
 	pid_t	pid;
 
@@ -70,7 +85,17 @@ void	execute_command(t_exec *fd, int *pip, t_cmd *data, char **cmds)
 	{
 		signal(SIGINT, cat_handle_sigint);
 		signal(SIGQUIT, cat_handle_sigint);
-		execute_child(fd, pip, data, cmds);
+		if (open_fd_file(data, &fd.fd_inp, &fd.fd_oup, &fd.fd_app))
+		{
+			if (fd.fd_inp > 0)
+				close(fd.fd_inp);
+			fd.fd_inp = 0;
+			data = data->next;
+			exit(1);
+		}
+		manage_fd(&fd, data, pip);
+		setup_pipes(fd.fd_inp, pip);
+		handle_builtin_commands(data, cmds, fd.path, fd.env);
 	}
 	else if (pid < 0)
 		puterr(NULL);

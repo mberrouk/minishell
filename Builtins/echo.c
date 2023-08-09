@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:01:21 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 17:45:37 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 03:56:09 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,22 @@ int	check_option(char *str)
 	return (-1);
 }
 
+void	check_op(char **av, int *flag, int *i)
+{
+	int	j;
+
+	j = 0;
+	while (av[j])
+	{
+		if (av[*i] != NULL && check_option(av[*i]) == 0)
+		{
+			*flag = 1;
+			(*i)++;
+		}
+		j++;
+	}
+}
+
 void	echo(char **av)
 {
 	int	i;
@@ -48,15 +64,7 @@ void	echo(char **av)
 	i = 1;
 	flag = 0;
 	j = 0;
-	while (av[j])
-	{
-		if (av[i] != NULL && check_option(av[i]) == 0)
-		{
-			flag = 1;
-			i++;
-		}
-		j++;
-	}
+	check_op(av, &flag, &i);
 	while (av[i])
 	{
 		if (av[i])

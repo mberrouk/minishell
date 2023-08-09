@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:24:30 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 00:54:20 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 04:05:47 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,28 +73,8 @@ void	ft_unset(t_env **env_list, char **av)
 		g_info.exit_status = 0;
 		return ;
 	}
-	else if (av[1][0] >= '0' && av[1][0] <= '9')
-	{
-		_print(2, "minishell: unset: '%s' not a valid identifier\n", av[1]);
-		g_info.exit_status = 1;
+	else if (chhe(av, "unset") == -1)
 		return ;
-	}
-	while (av[i])
-	{
-		j = 0;
-		while (av[i][j])
-		{
-			if (av[i][j] == ' ')
-			{
-				_print(2, "minishell: unset: '%s' not a valid\
-				 identifier\n", av[i]);
-				g_info.exit_status = 1;
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
 	check(env_list, av);
 	g_info.exit_status = 0;
 }

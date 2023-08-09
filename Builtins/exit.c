@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:10:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 17:54:34 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 03:40:32 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,15 @@ int	check_valid_arg(char **str)
 	return (0);
 }
 
+void	err_exitmsg(char **av)
+{
+	_print(2, "exit\nminishell: exit: %s: numeric argument required\n", av[1]);
+	exit (255);
+}
+
 void	ft_exit(char **av)
 {
-	int	c;
+	size_t	c;
 
 	if (av[1] == NULL)
 	{
@@ -49,18 +55,10 @@ void	ft_exit(char **av)
 		return ;
 	}
 	if (av[1] && check_valid_arg(av) == -2)
-	{
-		_print(2, "exit\nminishell: exit: %s: numeric argument\
-		 required\n", av[1]);
-		exit (255);
-	}
+		err_exitmsg(av);
 	c = ft_atoi(av[1]);
-	if (c == 4)
-	{
-		_print(2, "exit\nminishell: exit: %s: numeric argument\
-		 required\n", av[1]);
-		exit(255);
-	}
+	if (c == __LONG_LONG_MAX__)
+		err_exitmsg(av);
 	write(2, "exit\n", 5);
 	exit(c);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 02:03:47 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 04:04:15 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_exec
 void	cat_handle_sigint(int sig);
 char	**ft_split(char const *s, char c);
 int		ft_strcmp(const char *s1, const char *s2);
-int		ft_atoi(const	char	*str);
+size_t		ft_atoi(const	char	*str);
 void	ft_env(t_env *list_env, char **av);
 void	pwd(void);
 void	ft_echo(char **av);
@@ -122,7 +122,7 @@ char	*ft_access(char **paths, char *cmd);
 void	handle_builtin_commands(t_cmd *data, char **cmds, char **path, char **env);
 void	setup_pipes(int ifd, int *pip);
 void	open_doc(t_cmd *cmd, char **env);
-void	execute_command(t_exec *fd, int *pip, t_cmd *data, char **cmds);
+void	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds);
 int		open_fd_file(t_cmd *data, int *fd_inp, int *fd_oup, int *fd_app);
 void	cd_3(t_env **env_list, char **cmds);
 int		ft_isalpha(int c);
@@ -140,4 +140,7 @@ t_env	*env_new(char *s1, char *s2);
 char	*pars_expan(t_lexer *data, char **env);
 int	export_help(char **av, t_env *env, char *value, int i);
 t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env);
+int	old_erreur(t_env *s, int flag);
+void	cd__(t_env **env_list, char **new_dir_path);
+int	chhe(char **av, char *par);
 #endif 

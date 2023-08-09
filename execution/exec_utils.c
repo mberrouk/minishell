@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:32:14 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 16:58:10 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 04:19:25 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	builtin_status(char **str)
 {
-	if (!str)
+	if (!str || !*str)
 		return (-1);
 	if (!ft_strncmp("cd", str[0], 3)
 		|| !ft_strncmp("pwd", str[0], 4)

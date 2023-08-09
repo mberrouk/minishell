@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 01:07:50 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 04:16:56 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,15 @@ void	setup_pipe_fds(int *pip_fds, t_exec *fd, t_cmd *data)
 {
 	pip_fds[1] = 1;
 	pip_fds[0] = 0;
-	if (data->type == APPEND_RE)
-	{
-		if (fd->fd_oup != 1)
-			close(fd->fd_oup);
-		fd->fd_oup = fd->fd_app;
-	}
 	if (data->next)
 	{
 		if (pipe(pip_fds) == -1)
 			puterr(NULL);
-		if (fd->fd_oup > 1)
-		{
-			close(pip_fds[1]);
-			pip_fds[1] = fd->fd_oup;
-		}
+		//exit(-1);     /** ! **/
 	}
 	else
 		pip_fds[1] = fd->fd_oup;
-	if (data->input > 0)
-	{
-		if (fd->fd_inp > 0)
-			close(fd->fd_inp);
-		fd->fd_inp = data->input;
-	}
-	execute_command(fd, pip_fds, data, data->cmd);
+	execute_command(*fd, pip_fds, data, data->cmd);
 	if (fd->fd_inp != 0)
 		close(fd->fd_inp);
 	if (pip_fds[1] != 1)
@@ -65,14 +49,6 @@ void	execute_commands(t_cmd *data, int fd_inp, char **path, char **env)
 		fd.fd_oup = 1;
 		if (!data->cmd && !data->file)
 			return ;
-		if (open_fd_file(data, &fd.fd_inp, &fd.fd_oup, &fd.fd_app))
-		{
-			if (fd.fd_inp > 0)
-				close(fd.fd_inp);
-			fd.fd_inp = 0;
-			data = data->next;
-			continue ;
-		}
 		setup_pipe_fds(pip_fds, &fd, data);
 		fd.fd_inp = pip_fds[0];
 		data = data->next;
@@ -115,6 +91,7 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 		while (wait(&status) > 0)
 			;
 		status = WEXITSTATUS(status);
+		g_info.exit_status = status;
 		free_double(path);
 	}
 }
