@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/09 00:55:16 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:05:34 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,11 @@ char	**convert_env(void)
 	tmp = g_info.g_env;
 	while (tmp)
 	{
-		env[i] = ft_strjoin(ft_realloc(ft_strdup(tmp->key), '=')\
+		env[i] = ft_strjoin(ft_realloc(ft_strdup(tmp->key), '=') \
 			, ft_strdup(tmp->val));
 		tmp = tmp->next;
 		i++;
 	}
-	printf("\n---------------------------------\n");
-		for (t_env *var = g_info.g_env; var; var = var->next)
-		printf("%s  %s\n", var->key, var->val);
-	printf("\n---------------------------------\n");
 	return (env);
 }
 
@@ -94,7 +90,7 @@ int	main(int ac, char *av[], char *env[])
 		{
 			tmpenv = convert_env();
 			init_parse(&cmds, line, tmpenv);
-			exec_cmds(cmds, 0, env);
+			exec_cmds(cmds, 0, tmpenv);
 		}
 		free(line);
 		free_double(tmpenv);
