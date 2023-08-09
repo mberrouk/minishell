@@ -6,12 +6,11 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 19:12:09 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 17:56:10 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 02:00:38 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "../include/parser.h"
 #include "../include/shell.h"
 
 char	*fstrdup(char *src)

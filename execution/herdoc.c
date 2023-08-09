@@ -6,12 +6,11 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:38:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 17:01:31 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:56:20 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/fcntl.h>
-#include <unistd.h>
 #include "../include/shell.h"
 
 void	handle_doc_sigint(int signal)

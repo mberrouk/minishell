@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 03:31:45 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/08 23:38:49 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:29:11 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
-char	**ultra_split(char *str, char *charset);
 
 t_file	*new_file(SymTok	type, char *name)
 {
@@ -119,74 +118,4 @@ t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env)
 			tmp->cmd = join_double(tmp->cmd, ft_strdup(ptr->arg));
 	}
 	return (ptr->next);
-}
-
-t_lexer	*parse_lexer_data(t_cmd **head, t_lexer *ptr, t_cmd *cmd, char **env)
-{
-	t_cmd	*tmp;
-	SymTok	token;
-
-	tmp = cmd;
-	token = ptr->sym;
-	if (token == SIMPLE_CMD)
-		return (hold_args(head, ptr, tmp, env));
-	ptr = ptr->next;
-	if (!ptr || ptr->sym != SIMPLE_CMD)
-	{
-		if (!ptr)
-			_print(2, "syntax error near unexpected token `%s'\n", "newline");
-		else
-			_print(2, "syntax error near unexpected token `%s'\n", ptr->arg);
-		g_info.exit_status = 258;
-		clean_parss(head);
-		return (0x00);
-	}
-	ptr->sym = token;
-	return (hold_args(head, ptr, tmp, env));
-}
-
-int	check_token(t_lexer *ptr, t_lexer *data, t_cmd **cmd)
-{
-	if ((ptr && ptr->sym == PIPE && ptr == data)
-		|| ((ptr && ptr->sym == PIPE)
-			&& (!ptr->next || ptr->next->sym == PIPE)))
-	{
-		_print(2, "syntax error near unexpected token `%s'\n", ptr->arg);
-		g_info.exit_status = 258;
-		clean_parss(cmd);
-		return (1);
-	}
-	return (0);
-}
-
-void	init_parse(t_cmd **cmd, char *line, char *env[])
-{
-	t_lexer	*data;
-	t_lexer	*ptr;
-	t_cmd	*tmp;
-
-	data = NULL;
-	if (!line || !line[skip_withespace(line, 0)])
-		return ;
-	lexical_analysis(line, &data);
-	ptr = data;
-	tmp = NULL;
-	while (ptr)
-	{
-		if (check_token(ptr, data, cmd))
-			break ;
-		else
-		{
-			parser_lstadd_back(cmd,  parser_lstnew(NULL));
-			if (tmp)
-				tmp = tmp->next;
-			else 
-				tmp = *cmd;
-		}
-		if (ptr->sym == PIPE)
-			ptr = ptr->next;
-		while (ptr && ptr->sym != PIPE)
-			ptr = parse_lexer_data(cmd, ptr, tmp, env);
-	}
-	clean_lexer(data);
 }

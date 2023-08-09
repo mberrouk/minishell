@@ -6,12 +6,11 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:21:07 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 18:35:50 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:59:50 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "../include/parser.h"
 #include "../include/shell.h"
 
 int	len_equal(char *s)

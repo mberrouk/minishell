@@ -6,12 +6,11 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:22:17 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 18:37:31 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:56:11 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "../include/parser.h"
 #include "../include/shell.h"
 
 void	sort_export(t_env *env, int indice, int size)

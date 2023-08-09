@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:22 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/04 22:44:27 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:25:12 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
-/**
- * is_sep - Checks if a character is a separator
- * @s: The character to be checked
- * @sp: The separator character
- *
- * Return: 1 if the character is a separator, 0 otherwise
- */
 static int	is_sep(char s, char sp)
 {
 	if (sp == s)
@@ -28,15 +21,6 @@ static int	is_sep(char s, char sp)
 	return (0);
 }
 
-
-/**
- * count_dup - Counts and duplicates substrings based on a separator
- * @s: The array of strings to store the substrings
- * @str: The input string
- * @c: The separator character
- *
- * Return: The array of strings with the duplicated substrings
- */
 static char	**count_dup(char **s, char *str, char c)
 {
 	int	i;
@@ -66,14 +50,6 @@ static char	**count_dup(char **s, char *str, char c)
 	return (s);
 }
 
-
-/**
- * ft_split - Splits a string into an array of substrings based on a separator
- * @s: The input string
- * @c: The separator character
- *
- * Return: The array of substrings, or NULL on failure
- */
 char	**ft_split(char const *s, char c)
 {
 	char	**word;

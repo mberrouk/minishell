@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 00:34:00 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 02:03:47 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-
-
 typedef struct s_da
 {
 	t_env			*g_env;
@@ -51,43 +49,35 @@ typedef struct s_at
 
 typedef struct s_echo
 {
-    int i;
-    int flag;
-    int j;
-    int k;
-}   t_echo;
-
-// typedef struct s_cd
-// {
-//     char buf[10000];
-//     char *dir;
-//     t_env *output;
-// } t_cd;
+	int	i;
+	int	flag;
+	int	j;
+	int	k;
+}	t_echo;
 
 typedef struct s_file
 {
-    SymTok			type;
+	SymTok			type;
 	char			*name;
-	int				fd;			/** the file descripti*/
+	int				fd;			
 	struct s_file	*next;
 }	t_file;
 
 typedef struct s_cmd
 {
-    SymTok			type;
-	char			**cmd; 
+	SymTok			type;
+	char			**cmd;
 	t_file			*file;
 	int				input;
 	struct s_cmd	*next;
 }	t_cmd;
 
-
 typedef struct s_unset
 {
-    int i;
-    t_env *prev;
-    t_env *current;
-}   t_unset;
+	int		i;
+	t_env	*prev;
+	t_env	*current;
+}	t_unset;
 
 typedef struct s_exec
 {
@@ -108,20 +98,19 @@ void	ft_echo(char **av);
 void	ft_exit(char **av);
 void	ft_env(t_env *list_env, char **av);
 void	ft_unset(t_env **env_list, char **av);
-//void	builtins_main(t_env **env_list, char **line);
 void	ft_cd(t_env **env_list, char **new_dir_path);
-void    ft_export(char **av, t_env *env);
+void	ft_export(char **av, t_env *env);
 void	ft_putstr_fd(char *s, int fd);
 char	*fstrdup(char *src);
 void	set_pwd(t_env **envlist, char *dir);
 void	set_oldpwd(t_env **envlist, char *dir);
 t_env	*searching_key(t_env *env_list, char *key);
-void    free_env(t_env  *current);
-int     expo(char **av, t_env	*env);
-int     env_len(t_env *env);
+void	free_env(t_env *current);
+int		expo(char **av, t_env	*env);
+int		env_len(t_env *env);
 void	builtins_main(t_env **env_list, t_cmd *cmd);
 int		ft_lstsize_s(char **lst);
-void	execution(t_cmd   *cmds, char **env);
+void	execution(t_cmd *cmds, char **env);
 int		builtin_status(char **str);
 void	puterr(char *str);
 void	not_found(char *parm);
@@ -148,4 +137,7 @@ void	print(t_env *env, t_env *tmp, int size);
 void	help(t_env *tmp, char *key, char *value, int x);
 void	envadd_back(t_env **lst, t_env *new);
 t_env	*env_new(char *s1, char *s2);
+char	*pars_expan(t_lexer *data, char **env);
+int	export_help(char **av, t_env *env, char *value, int i);
+t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env);
 #endif 

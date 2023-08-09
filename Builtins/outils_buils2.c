@@ -6,12 +6,11 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:29:44 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 17:57:37 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:59:58 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "../include/parser.h"
 #include "../include/shell.h"
 
 t_env	*searching_key(t_env *env_list, char *key)

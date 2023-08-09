@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_in_doublq.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 06:58:18 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/08 23:27:48 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:35:02 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	handl_cases(char **value, char *arg, int ndol)
 	else
 	{
 		if ((arg[i] == '\"' || arg[i] == '\''))
-			*value = ft_realloc(*value, arg[i - 1]); 
+			*value = ft_realloc(*value, arg[i - 1]);
 		len = len_to_spchar(arg);
 		*value = ft_strjoin(*value, ft_substr(arg, i, len));
 		i += len;
@@ -53,7 +53,7 @@ int	handl_cases(char **value, char *arg, int ndol)
 	return (i);
 }
 
-char *expan_in_dquots(char *arg, char **env)
+char	*expan_in_dquots(char *arg, char **env)
 {
 	int		i;
 	char	*value;
@@ -67,8 +67,8 @@ char *expan_in_dquots(char *arg, char **env)
 			value = ft_realloc(value, arg[i++]);
 		ndol = skip_dollar(&value, &arg[i]);
 		i += ndol;
-		if ((ndol && ndol % 2 == 0) ||
-			(i && arg[i - 1] == '$' && check_sp_char(arg[i])))
+		if ((ndol && ndol % 2 == 0)
+			|| (i && arg[i - 1] == '$' && check_sp_char(arg[i])))
 		{
 			if (ndol && ndol % 2 == 0)
 				i += not_expand(&value, &arg[i]);

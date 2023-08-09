@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:15 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/08 01:04:14 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:24:52 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	lexer_lstadd_back(t_lexer **lst, t_lexer *node)
 {
 	t_lexer	*ptr;
-	
+
 	if (!lst)
 		return ;
 	ptr = *lst;

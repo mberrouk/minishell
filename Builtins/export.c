@@ -6,12 +6,11 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:22:43 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 18:23:52 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:59:56 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "../include/parser.h"
 #include "../include/shell.h"
 
 int	env_len(t_env *env)
