@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:25 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/08 18:57:26 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 00:06:56 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,4 +153,5 @@ void	clean_parss(t_cmd **cmd);
 void	clean_lexer(t_lexer *data);
 
 int skip_dollar(char **value, char *arg);
+
 #endif

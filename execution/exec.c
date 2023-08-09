@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 23:53:08 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 00:57:43 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,67 +16,69 @@
 #include "../include/shell.h"
 #include "../include/minishell.h"
 
-void	setup_pipe_fds(int *pip_fds, int fd_oup, int fd_app, int *fd_inp, t_cmd *data, char **path, char **env)
+void	setup_pipe_fds(int *pip_fds, t_exec *fd, t_cmd *data)
 {
 	pip_fds[1] = 1;
 	pip_fds[0] = 0;
 	if (data->type == APPEND_RE)
 	{
-		if (fd_oup != 1)
-			close(fd_oup);
-		fd_oup = fd_app;
+		if (fd->fd_oup != 1)
+			close(fd->fd_oup);
+		fd->fd_oup = fd->fd_app;
 	}
 	if (data->next)
 	{
 		if (pipe(pip_fds) == -1)
 			puterr(NULL);
-		if (fd_oup > 1)
+		if (fd->fd_oup > 1)
 		{
 			close(pip_fds[1]);
-			pip_fds[1] = fd_oup;
+			pip_fds[1] = fd->fd_oup;
 		}
 	}
 	else
-		pip_fds[1] = fd_oup;
+		pip_fds[1] = fd->fd_oup;
 	if (data->input > 0)
 	{
-		if (*fd_inp > 0)
-			close(*fd_inp);
-		*fd_inp = data->input;
+		if (fd->fd_inp > 0)
+			close(fd->fd_inp);
+		fd->fd_inp = data->input;
 	}
-	execute_command(*fd_inp, pip_fds, data, data->cmd, path, env);
-	if (*fd_inp != 0)
-		close(*fd_inp);
+	execute_command(fd, pip_fds, data, data->cmd);
+	if (fd->fd_inp != 0)
+		close(fd->fd_inp);
 	if (pip_fds[1] != 1)
 		close(pip_fds[1]);
 }
 
 void	execute_commands(t_cmd *data, int fd_inp, char **path, char **env)
 {
-	int	pip_fds[2];
-	int	fd_oup;
-	int	fd_app;
+	int		pip_fds[2];
+	t_exec	fd;
 
-	fd_app = -1;
+	fd.fd_app = -1;
+	fd.env = env;
+	fd.path = path;
+	fd.fd_inp = fd_inp;
 	while (data != NULL)
 	{
-		fd_oup = 1;
+		fd.fd_oup = 1;
 		if (!data->cmd && !data->file)
 			return ;
-		if (open_fd_file(data, &fd_inp, &fd_oup, &fd_app))
+		if (open_fd_file(data, &fd.fd_inp, &fd.fd_oup, &fd.fd_app))
 		{
-			if (fd_inp > 0)
-				close(fd_inp);
-			fd_inp = 0;
+			if (fd.fd_inp > 0)
+				close(fd.fd_inp);
+			fd.fd_inp = 0;
 			data = data->next;
 			continue ;
 		}
-		setup_pipe_fds(pip_fds, fd_oup, fd_app, &fd_inp, data, path , env);
-		fd_inp = pip_fds[0];
+		setup_pipe_fds(pip_fds, &fd, data);
+		fd.fd_inp = pip_fds[0];
 		data = data->next;
 	}
-	if (fd_inp != 0)
-		close(fd_inp);
+	if (fd.fd_inp != 0)
+		close(fd.fd_inp);
 }
 
 void	cmds(t_cmd *data, int fd_inp, char **path, char **env)
@@ -107,7 +109,11 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 		builtins_main(&g_info.g_env, data);
 	else
 	{
+		for (int i = 0; env[i]; i++)
+			printf("-->> %s\n", env[i]);
+		printf("-----> <------\n");
 		path = find_path(env);
+		printf("%s\n", *path);
 		open_doc(data, env);
 		cmds(data, 0, path, env);
 		while (wait(&status) > 0)

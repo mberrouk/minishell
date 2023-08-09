@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/08 15:49:00 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/09 00:55:16 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ char	**convert_env(void)
 		tmp = tmp->next;
 		i++;
 	}
+	printf("\n---------------------------------\n");
+		for (t_env *var = g_info.g_env; var; var = var->next)
+		printf("%s  %s\n", var->key, var->val);
+	printf("\n---------------------------------\n");
 	return (env);
 }
 
@@ -82,7 +86,7 @@ int	main(int ac, char *av[], char *env[])
 	{
 		signals();
 		tmpenv = NULL;
-		line = readline("\033[1;34mminishell$  \033[1;0m");;
+		line = readline("\033[1;34mminishell$  \033[1;0m");
 		if (!line)
 			return (errno);
 		add_history(line);

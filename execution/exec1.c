@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 23:50:27 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 00:33:45 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ char	*ft_access(char **paths, char *cmd)
 	return (NULL);
 }
 
-void	execute_child(int ifd, int *pip, t_cmd *data, char **cmds, char **path, char **env)
+void	execute_child(t_exec *fd, int *pip, t_cmd *data, char **cmds)
 {
-	setup_pipes(ifd, pip);
-	handle_builtin_commands(data, cmds, path, env);
+	setup_pipes(fd->fd_inp, pip);
+	handle_builtin_commands(data, cmds, fd->path, fd->env);
 }
 
 void	cat_handle_sigint(int sig)
@@ -60,7 +60,7 @@ void	cat_handle_sigint(int sig)
 	}
 }
 
-void	execute_command(int ifd, int *pip, t_cmd *data, char **cmds, char **path, char **env) 
+void	execute_command(t_exec *fd, int *pip, t_cmd *data, char **cmds)
 {
 	pid_t	pid;
 
@@ -70,7 +70,7 @@ void	execute_command(int ifd, int *pip, t_cmd *data, char **cmds, char **path, c
 	{
 		signal(SIGINT, cat_handle_sigint);
 		signal(SIGQUIT, cat_handle_sigint);
-		execute_child(ifd, pip, data, cmds, path, env);
+		execute_child(fd, pip, data, cmds);
 	}
 	else if (pid < 0)
 		puterr(NULL);

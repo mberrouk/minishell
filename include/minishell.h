@@ -6,25 +6,30 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/08 23:50:07 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/09 00:34:00 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
-#include <stdbool.h>
-#include "../include/lexer.h"
+# include <stdbool.h>
+# include <stdarg.h>
+# include <limits.h>
+# include <string.h>
+
+# include "../include/lexer.h"
 
 typedef struct s_env
 {
 	char			*key;
 	char			*val;
 	int				index;
-	struct s_env		*next;
+	struct s_env	*next;
 }	t_env;
 
 
@@ -33,17 +38,9 @@ typedef struct s_da
 {
 	t_env			*g_env;
 	int				exit_status;
-}  t_da;
+}	t_da;
 
 t_da	g_info;
-
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <limits.h>
-# include <string.h>
-# include <stdarg.h>
-
 
 typedef struct s_at
 {
@@ -92,10 +89,14 @@ typedef struct s_unset
     t_env *current;
 }   t_unset;
 
-typedef struct s_execu
+typedef struct s_exec
 {
-	
-}	t_execu;
+	int		fd_oup;
+	int		fd_app;
+	int		fd_inp;
+	char	**path;
+	char	**env;
+}	t_exec;
 
 void	cat_handle_sigint(int sig);
 char	**ft_split(char const *s, char c);
@@ -132,7 +133,7 @@ char	*ft_access(char **paths, char *cmd);
 void	handle_builtin_commands(t_cmd *data, char **cmds, char **path, char **env);
 void	setup_pipes(int ifd, int *pip);
 void	open_doc(t_cmd *cmd, char **env);
-void	execute_command(int ifd, int *pip, t_cmd *data, char **cmds, char **path, char **env);
+void	execute_command(t_exec *fd, int *pip, t_cmd *data, char **cmds);
 int		open_fd_file(t_cmd *data, int *fd_inp, int *fd_oup, int *fd_app);
 void	cd_3(t_env **env_list, char **cmds);
 int		ft_isalpha(int c);
