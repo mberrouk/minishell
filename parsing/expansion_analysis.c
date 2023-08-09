@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 05:54:30 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/08 23:18:49 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/05 06:43:20 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ char	*expan_arg(char *arg, char *env[])
 			i += len;
 		}
 		while (arg[i] != '$' && arg[i] != '\'' && arg[i] != '\"' && arg[i])
-			value = ft_realloc(value, arg[i++]);
+		{
+			value = ft_realloc(value, arg[i]); 
+			i++;
+		}
 	}
 	free(arg);
 	return (value);

@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:22:38 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/09 00:07:23 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/03 10:58:28 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int	hold_arg(char *line, t_lexer *ptr)
 		if (!flg && (line[i] == '>' || line[i] == '<' || line[i] == '|'
 				|| ((line[i] >= 9 && line[i] <= 13) || line[i] == ' ')))
 			break ;
-		ptr->arg = ft_realloc(ptr->arg, line[i++]);
+		ptr->arg = ft_realloc(ptr->arg, line[i]);
+		i++;
 	}
 	return (i);
 }
@@ -103,3 +104,4 @@ void	lexical_analysis(char *line, t_lexer **lst)
 			i += hold_arg(&line[i], ptr);
 	}
 }
+

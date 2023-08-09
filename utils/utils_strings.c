@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_strings.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:35:17 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/09 01:20:22 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/06 01:26:10 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_realloc(char *str, char c)
 	len = ft_strlen(str) + 2;
 	new = malloc(sizeof(char) * len);
 	if (!new)
-		return (print_err("malloc failed\n"));
+		return print_err("malloc failed\n");
 	i = 0;
 	if (str)
 	{
@@ -59,6 +59,14 @@ char	*ft_realloc(char *str, char c)
 	return (new);
 }
 
+/**
+ * ft_strlcpy - Copies a string up to a given size
+ * @dest: The destination buffer
+ * @src: The source string
+ * @dstsize: The size of the destination buffer
+ *
+ * Return: The length of the source string
+ */
 int	ft_strlcpy(char *dest, char *src, int dstsize)
 {
 	int	i;
@@ -111,3 +119,4 @@ char	*ft_strjoin(char *s1, char *s2)
 	new[i + j] = '\0';
 	return (new);
 }
+

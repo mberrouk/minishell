@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   outils_built.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:15:37 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 03:37:50 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/07 22:18:15 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -38,7 +39,7 @@ static	int	w_space(const	char	*str)
 	return (i);
 }
 
-size_t	ft_atoi(const	char	*str)
+int	ft_atoi(const	char	*str)
 {
 	t_at	vars;
 
@@ -59,9 +60,9 @@ size_t	ft_atoi(const	char	*str)
 	}
 	if (str[vars.i])
 		return (-1);
-	if (vars.sig == 1 && vars.r >= __LONG_LONG_MAX__)
-		return (__LONG_LONG_MAX__);
-	if (vars.sig == -1 && vars.r >= __LONG_LONG_MAX__)
-		return (__LONG_LONG_MAX__);
+	if (vars.sig == 1 && vars.r > __LONG_LONG_MAX__)
+		return (4);
+	if (vars.sig == -1 && vars.r > __LONG_LONG_MAX__)
+		return (4);
 	return (vars.r * vars.sig);
 }
