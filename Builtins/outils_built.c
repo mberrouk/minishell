@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:15:37 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 03:37:50 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 07:44:53 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ size_t	ft_atoi(const	char	*str)
 	}
 	if (str[vars.i])
 		return (-1);
-	if (vars.sig == 1 && vars.r >= __LONG_LONG_MAX__)
-		return (__LONG_LONG_MAX__);
-	if (vars.sig == -1 && vars.r >= __LONG_LONG_MAX__)
-		return (__LONG_LONG_MAX__);
+	if (vars.sig == 1 && vars.r > LONG_MAX)
+		return (SIZE_MAX);
+	if (vars.sig == -1 && vars.r - LONG_MAX > 1)
+		return (SIZE_MAX);
 	return (vars.r * vars.sig);
 }

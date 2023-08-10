@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:10:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 03:40:32 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 07:46:58 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_exit(char **av)
 	if (av[1] && check_valid_arg(av) == -2)
 		err_exitmsg(av);
 	c = ft_atoi(av[1]);
-	if (c == __LONG_LONG_MAX__)
+	if (c == SIZE_MAX)
 		err_exitmsg(av);
 	write(2, "exit\n", 5);
 	exit(c);
