@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:38:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 18:54:20 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 20:58:38 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,12 @@ void	her_doc_loop(int *tab, char *delm, char **env)
 		line = readline("> ");
 		if (line == NULL)
 		{
-			_print(2, "%s\n", line);
-			exit(-1);
+			perror("Error");
+			return ;
 		}
 		else
-		{
 			if (line && *line && ft_strcmp(line, delm) == 0)
-			{
-				free(line);
 				break ;
-			}
-		}
 		if (line && *line)
 		{
 			line = expan_in_dquots(line, env);
@@ -54,6 +49,8 @@ void	her_doc_loop(int *tab, char *delm, char **env)
 		if (line)
 			free(line);
 	}
+	if (line)
+		free(line);
 }
 
 void	handle_append_herdoc(t_cmd *data, char *delm, char **env)
