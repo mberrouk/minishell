@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:53:31 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 00:10:18 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 01:15:22 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ int	chhe(char *av, char *par)
 		return (err_msg_inden(av, par));
 	while (av[i])
 	{
-		if (sp_at_end(av[i]))
+		if (sp_at_end(av[i]) && av[i] != '=' && av[i] != '+')
 				return (err_msg_inden(av, par));
 		i++;
 	}	
-	return (0);
+	return (1);
 }
 
 int	export_help(char **av, t_env *env, char *value, int i)
@@ -105,7 +105,7 @@ int	export_help(char **av, t_env *env, char *value, int i)
 	char	*key;
 	int		x;
 
-	if (check_identifier(av[i], 0))
+	if (chhe(av[i], "export") == 1)
 	{
 		key = cat_equals(av[i], &x, 0);
 		if (key)

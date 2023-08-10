@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:55:38 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 00:09:39 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 00:41:51 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/shell.h"
-
 
 
 void	export_(char **av, t_env *env)
@@ -22,8 +21,7 @@ void	export_(char **av, t_env *env)
 	i = 1;
 	while (av[i])
 	{
-		if (!export_help(av, env, NULL, i))
-			break ;
+		export_help(av, env, NULL, i);
 		i++;
 	}	
 }
@@ -42,7 +40,7 @@ void	ft_export(char **av, t_env *env)
 	}
 	else
 	{
-		if (chhe(av[1], "export") == 0)
+		//if (chhe(av[1], "export") == 0)
 			export_(av, env);
 	}
 }
