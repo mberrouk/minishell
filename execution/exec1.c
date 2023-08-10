@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 19:03:39 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:01:39 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,9 @@ void	manage_fd(t_exec *fd, t_cmd *data, int *pip)
 
 int	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds)
 {
-	pid_t	pid;
-
 	signal(SIGINT, SIG_IGN);
-	pid = fork();
-	if (pid == 0)
+	data->pid = fork();
+	if (data->pid == 0)
 	{
 		signal(SIGINT, cat_handle_sigint);
 		signal(SIGQUIT, cat_handle_sigint);
@@ -100,7 +98,7 @@ int	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds)
 		setup_pipes(fd.fd_inp, pip);
 		han_buil_comnds(data, cmds, fd.path, fd.env);
 	}
-	else if (pid < 0)
+	else if (data->pid < 0)
 	{
 		perror("Error");
 		g_info.exit_status = 1;

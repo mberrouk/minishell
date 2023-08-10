@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 19:08:02 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 21:54:10 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_cmd
 	char			**cmd;
 	t_file			*file;
 	int				input;
+	int				pid;
 	struct s_cmd	*next;
 }	t_cmd;
 

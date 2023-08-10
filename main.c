@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 20:13:24 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:24:52 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,15 @@ void	sigint(int sig)
 	(void)sig;
 	g_info.exit_status = 1;
 	write(1, "\n", 1);
+	rl_replace_line("", 0);
 	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	signals(void)
 {
-	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sigint);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 int	main(int ac, char *av[], char *env[])

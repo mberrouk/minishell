@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 20:30:45 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:08:36 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,17 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 		path = find_path(env);
 		open_doc(data, env);
 		drp = execute_commands(data, 0, path, env);
-		while (wait(&status) > 0)
-			;
-		status = WEXITSTATUS(status);
-		if (!drp)
-			g_info.exit_status = status;
+		while (data)
+		{
+			waitpid(data->pid, &status, 0);
+			data = data->next;
+		}
+		if (WIFEXITED(status))
+		{	if (!drp)
+				g_info.exit_status = WEXITSTATUS(status);
+		}
+		else if (WIFSIGNALED(status)) 
+            g_info.exit_status = WTERMSIG(status) + 128;
 		free_double(path);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:32:14 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 20:48:16 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 21:43:55 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ void	not_found(char *parm)
 		write(STDERR_FILENO, parm, ft_strlen(parm));
 	write(STDERR_FILENO, ": command not found\n", 21);
 	free(parm);
-	exit(127);
+	g_info.exit_status = 127;
+	_print(2, "\n=======%d---\n", g_info.exit_status);
+	exit(g_info.exit_status);
 }
 
 char	**find_path(char **env)

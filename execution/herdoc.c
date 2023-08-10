@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:38:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 20:58:38 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:35:42 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	handle_doc_sigint(int signal)
 
 void	sign_herdoc(void)
 {
-	signal(SIGINT, handle_doc_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_DFL);
+	// signal(SIGQUIT, SIG_IGN);
 }
 
 void	her_doc_loop(int *tab, char *delm, char **env)
@@ -32,14 +32,8 @@ void	her_doc_loop(int *tab, char *delm, char **env)
 	while (1)
 	{
 		line = readline("> ");
-		if (line == NULL)
-		{
-			perror("Error");
-			return ;
-		}
-		else
-			if (line && *line && ft_strcmp(line, delm) == 0)
-				break ;
+		if ((!*line && !*delm) || (line && *line && ft_strcmp(line, delm) == 0))
+			break ;
 		if (line && *line)
 		{
 			line = expan_in_dquots(line, env);
@@ -62,7 +56,7 @@ void	handle_append_herdoc(t_cmd *data, char *delm, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
-		sign_herdoc();
+		signal(SIGINT, SIG_DFL);
 		her_doc_loop(tab, delm, env);
 		close(tab[0]);
 		close(tab[1]);
@@ -72,6 +66,7 @@ void	handle_append_herdoc(t_cmd *data, char *delm, char **env)
 	}
 	else
 	{
+		// sign_herdoc();
 		while (wait(0) > 0);
 		close(tab[1]);
 		if (data->input > 0)
