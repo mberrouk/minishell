@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 02:56:06 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 05:53:40 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,6 @@ void	execute_commands(t_cmd *data, int fd_inp, char **path, char **env)
 		close(fd.fd_inp);
 }
 
-void	cmds(t_cmd *data, int fd_inp, char **path, char **env)
-{
-	execute_commands(data, fd_inp, path, env);
-}
 
 int	size_cmds(t_cmd *cmds)
 {
@@ -84,9 +80,10 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 		builtins_main(&g_info.g_env, data);
 	else
 	{
+		g_info.exit_status = 0;
 		path = find_path(env);
 		open_doc(data, env);
-		cmds(data, 0, path, env);
+		execute_commands(data, 0, path, env);
 		while (wait(&status) > 0)
 			;
 		status = WEXITSTATUS(status);

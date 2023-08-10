@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 05:14:56 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 06:16:53 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 	}
 	else if (cmds && *cmds)
 	{
+		g_info.exit_status = 0;
 		if (cmds && cmds[0] && (cmds[0][0] == '/' || cmds[0][0] == '.'))
 			cmd = cmds[0];
 		else
@@ -90,8 +91,11 @@ void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 			not_found(cmds[0]);
 		if (execve(cmd, cmds, env) == -1)
 		{
-			puterr("minishell:");
-			exit(g_info.exit_status);
+			perror("minishell");
+			if (errno == 2)
+				exit(127);
+			if (errno == 13)
+				exit(126);
 		}
 	}
 	//else

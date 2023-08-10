@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:28:56 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 04:52:41 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 05:49:38 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ t_cmd	*get_the_next(t_cmd **cmd, t_cmd *tmp)
 {
 	parser_lstadd_back(cmd, parser_lstnew(NULL));
 	if (tmp)
+	{
+		g_info.exit_status = 0;
 		tmp = tmp->next;
+	}
 	else
 		tmp = *cmd;
 	return (tmp);
