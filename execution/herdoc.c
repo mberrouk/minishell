@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:38:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 22:35:42 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 23:36:08 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ void	handle_doc_sigint(int signal)
 
 void	sign_herdoc(void)
 {
-	signal(SIGINT, SIG_DFL);
-	// signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handle_doc_sigint);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	her_doc_loop(int *tab, char *delm, char **env)
 {
 	char	*line;
 
+	sign_herdoc();
 	while (1)
 	{
 		line = readline("> ");
@@ -54,9 +55,9 @@ void	handle_append_herdoc(t_cmd *data, char *delm, char **env)
 
 	pipe(tab);
 	pid = fork();
+	signal(SIGINT, SIG_IGN);
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
 		her_doc_loop(tab, delm, env);
 		close(tab[0]);
 		close(tab[1]);
@@ -66,7 +67,6 @@ void	handle_append_herdoc(t_cmd *data, char *delm, char **env)
 	}
 	else
 	{
-		// sign_herdoc();
 		while (wait(0) > 0);
 		close(tab[1]);
 		if (data->input > 0)

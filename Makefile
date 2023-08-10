@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:24:19 by mberrouk          #+#    #+#              #
-#    Updated: 2023/08/10 13:39:18 by mberrouk         ###   ########.fr        #
+#    Updated: 2023/08/10 23:14:14 by hoakoumi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = minishell
 
 CFLAGS		=	-Wall -Wextra -Werror -g #-fsanitize=address -g3
 
-IDFLAG		=	-I/Users/mberrouk/homebrew/opt/readline/include
+IDFLAG		=	-I/Users/hoakoumi/homebrew/opt/readline/include
 
-LDFLAG		=	-L/Users/mberrouk/homebrew/opt/readline/lib -lreadline
+LDFLAG		=	-L/Users/hoakoumi/homebrew/opt/readline/lib -lreadline
 
 SRCS =  utils/ft_split.c utils/linked_list_utils.c utils/utils_double_ptr.c utils/utils_err.c \
 		utils/utils_strings.c utils/utils_strings1.c parsing/lexer.c parsing/parser.c parsing/parsing_utils.c\
@@ -34,6 +34,7 @@ CC = cc #-g #-lncurses #-fsanitize=address -g3 #-Wall -Wextra -Werror  #-lncurse
 all : ${NAME}
 
 ${NAME} :
+	stty -echoctl
 	$(CC) -o $(NAME) $(IDFLAG) $(LDFLAG) $(CFLAGS) $(SRCS) 
 	make clean
 	#clear

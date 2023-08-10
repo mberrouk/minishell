@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 22:01:39 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 23:07:17 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds)
 	if (data->pid == 0)
 	{
 		signal(SIGINT, cat_handle_sigint);
-		signal(SIGQUIT, cat_handle_sigint);
+		signal(SIGQUIT, SIG_IGN);
 		if (open_fd_file(data, &fd.fd_inp, &fd.fd_oup, &fd.fd_app))
 		{
 			if (fd.fd_inp > 0)
