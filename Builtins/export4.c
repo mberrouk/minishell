@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:54:02 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 05:06:55 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:02:35 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ int	export_help(char **av, t_env *env, char *value, int i)
 		else
 			key = ft_strdup(av[i]);
 		if (get_key(env, key))
-			help(env, ft_strdup(key), value, x);
+			help(env, key, value, x);
 		else
 			export_add(ft_strdup(key), value);
 		free(key);
 		return (1);
 	}
+	if (key)
+		free(key);
 	return (0);
 }

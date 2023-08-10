@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 10:54:36 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 13:27:48 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ int	handle_input_redirection(t_cmd *data, t_file *file, int *fd_inp)
 		if (*fd_inp != 0)
 			close(*fd_inp);
 		*fd_inp = open(file->name, O_RDONLY);
-		if (*fd_inp == -1)
+		if (*fd_inp == -1 || !file->name)
 		{
-			perror(file->name);
+			_print(2, "minishell: ");
+			if (!file->name || !*file->name)
+				_print(2, "ambiguous redirect\n");
+			else
+				perror(file->name);
 			g_info.exit_status = 1;
 			return (1);
 		}
@@ -45,7 +49,10 @@ int	handle_output_redirection(t_cmd *data, t_file *file, int *fd_oup)
 		if (*fd_oup == -1)
 		{
 			_print(2, "minishell: ");
-			perror(file->name);
+			if (!file->name || !*file->name)
+				_print(2, "ambiguous redirect\n");
+			else
+				perror(file->name);
 			g_info.exit_status = 1;
 			return (1);
 		}
@@ -64,7 +71,10 @@ int	handle_append_redirection(t_cmd *data, t_file *file, int *fd_app)
 		if (*fd_app == -1)
 		{
 			_print(2, "minishell: ");
-			perror(file->name);
+			if (!file->name || !*file->name)
+				_print(2, "ambiguous redirect\n");
+			else
+				perror(file->name);
 			g_info.exit_status = 1;
 			return (1);
 		}
@@ -76,7 +86,7 @@ void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 {
 	char	*cmd;
 	DIR		*dir;
-	
+
 	if (cmds && *cmds && builtin_status(data->cmd) != -1)
 	{
 		builtins_main(&g_info.g_env, data);
@@ -94,12 +104,15 @@ void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 		if (execve(cmd, cmds, env) == -1)
 		{
 			if (errno == 2)
+			{
+				perror("minishell");
 				exit(127);
+			}
 			if (errno == 13)
 			{
 				dir = opendir(cmd);
 				if (dir)
-					_print(2, "is a directory\n");
+					_print(2, "minishell: is a directory\n");
 				else
 					perror("minishell");
 				exit(126);
@@ -115,7 +128,7 @@ void	setup_pipes(int ifd, int *pip)
 	if (ifd > 0)
 	{
 		if (dup2(ifd, STDIN_FILENO) == -1)
-			puterr("1: Error dup2\n");
+			puterr("Error");
 	}
 	if (ifd == -1)
 		return ;
@@ -123,7 +136,7 @@ void	setup_pipes(int ifd, int *pip)
 	{
 		if (dup2(pip[1], STDOUT_FILENO) == -1)
 		{
-			puterr("2: Error dup2\n");
+			puterr("Error");
 			if (pip[1] == -1)
 				close(ifd);
 		}

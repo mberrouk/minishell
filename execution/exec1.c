@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 08:11:46 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 13:15:20 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	cat_handle_sigint(int sig)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
+		rl_replace_line("", 0);
 	}
 }
 
@@ -118,5 +119,6 @@ int	open_fd_file(t_cmd *data, int *fd_inp, int *fd_oup, int *fd_app)
 			return (1);
 		tmp = tmp->next;
 	}
+	clean_file(data->file);
 	return (0);
 }

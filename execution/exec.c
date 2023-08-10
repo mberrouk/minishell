@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 08:22:48 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:55:30 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 
 	if (!data)
 		return ;
-	if (data->cmd && strcmp(*data->cmd, "exit") == 0 && (size_cmds(data) == 1))
+	if (data->cmd && (strcmp(*data->cmd, "exit") == 0
+		|| ((builtin_status(data->cmd) != -1) && !data->file)))
 		builtins_main(&g_info.g_env, data);
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 05:56:26 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 03:40:21 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:42:41 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ char	**add_simple_cmd(char **ttmp, t_lexer *ptr, t_cmd *tmp)
 			tmp ->cmd = join_double(tmp->cmd, ft_strdup(ttmp[i]));
 			i++;
 		}
-		free_double(ttmp);
 	}
 	else
 		tmp->cmd = join_double(tmp->cmd, ft_strdup(ptr->arg));

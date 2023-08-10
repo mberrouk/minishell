@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 03:31:45 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 05:48:34 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:42:54 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,21 @@ t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env)
 	if (check_quots(ptr->arg))
 		ptr->arg = handl_quots(ptr->arg);
 	else
+	{
 		ttmp = ultra_split(ptr->arg, " \t\n\r");
+	}
 	if (!(ptr->arg))
 	{
 		clean_parss(head);
 		return (0x00);
 	}
 	if (ptr->sym != SIMPLE_CMD)
+	{
 		add_file(&(tmp->file), new_file(ptr->sym, ft_strdup(ptr->arg)));
+	}
 	else
 		tmp->cmd = add_simple_cmd(ttmp, ptr, tmp);
+	if (ttmp)
+		free_double(ttmp);
 	return (ptr->next);
 }

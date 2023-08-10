@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:38:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 04:35:47 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:22:59 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,17 @@ void	her_doc_loop(int *tab, char *delm, char **env)
 
 	while (1)
 	{
-		line = readline(">");
+		line = readline("> ");
 		if (line == NULL)
+		{
+			_print(2, "%s\n", line);
 			exit(-1);
+		}
 		else
 		{
 			if (ft_strcmp(line, delm) == 0)
 			{
+				_print(2, "---> %s\n", line);
 				free(line);
 				break ;
 			}
@@ -62,6 +66,8 @@ void	handle_append_herdoc(t_cmd *data, char *delm, char **env)
 		her_doc_loop(tab, delm, env);
 		close(tab[0]);
 		close(tab[1]);
+		free_double(env);
+		free(delm);
 		exit(0);
 	}
 	else
@@ -85,7 +91,6 @@ void	open_doc(t_cmd *cmd, char **env)
 		{
 			if (file->type == INPUT_RE && cmd->input > 0)
 			{
-				printf("%d\n", cmd->input);
 				close(cmd->input);
 				cmd->input = -1;
 			}
