@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 02:57:35 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:55:33 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 	if (cmds && *cmds && builtin_status(data->cmd) != -1)
 	{
 		builtins_main(&g_info.g_env, data);
-		exit(0);
+		exit(g_info.exit_status);
 	}
 	else if (cmds && *cmds)
 	{
@@ -87,20 +87,15 @@ void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 		else
 			cmd = ft_access(path, cmds[0]);
 		if (!cmd)
-		{
 			not_found(cmds[0]);
-			exit(127);
-		}
 		if (execve(cmd, cmds, env) == -1)
 		{
 			puterr(NULL);
 			exit(g_info.exit_status);
 		}
 	}
-	else
-	{
-		exit(0);
-	}
+	//else
+	//	exit(0);
 }
 
 void	setup_pipes(int ifd, int *pip)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:24:30 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 02:55:55 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:51:00 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ void	check(t_env **env_list, char **av)
 
 void	ft_unset(t_env **env_list, char **av)
 {
-	int	i;
-	int	j;
-
-	i = 1;
-	j = 0;
 	if (!av || !av[1])
 	{
 		g_info.exit_status = 0;

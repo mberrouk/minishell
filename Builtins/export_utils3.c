@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:55:38 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 03:16:59 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:50:19 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ void	export_(char **av, t_env *env)
 void	ft_export(char **av, t_env *env)
 {
 	int	size;
-	int	i;
 
-	i = 1;
 	size = 0;
 	if (av[1] == NULL)
 	{

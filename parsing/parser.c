@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 03:31:45 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 03:40:36 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:49:31 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ char	*handl_quots(char *arg)
 t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env)
 {
 	char	**ttmp;
-	int		i;
 
-	i = 0;
 	ttmp = NULL;
 	if (ptr->sym != HERE_DOC && ft_strchr(ptr->arg, '$'))
 		ptr->arg = pars_arg_expan(ptr->arg, env);

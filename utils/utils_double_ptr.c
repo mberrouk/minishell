@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:09 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 03:38:17 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 04:18:24 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,26 @@ int	double_len(char **ptr)
 	while (ptr[len])
 		len++;
 	return (len);
+}
+
+void	copy_str(char *new, char *s1, char *s2)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (s1 && s1[i])
+	{
+		new[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2 && s2[j])
+	{
+		new[i + j] = s2[j];
+		j++;
+	}
+	new[i + j] = '\0';
 }
 
 char	**_dptr_copy(char **new, char **old, char *laststr)

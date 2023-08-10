@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:01:21 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 03:56:09 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:50:00 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ void	echo(char **av)
 {
 	int	i;
 	int	flag;
-	int	j;
 
 	i = 1;
 	flag = 0;
-	j = 0;
 	check_op(av, &flag, &i);
 	while (av[i])
 	{

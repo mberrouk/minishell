@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 00:07:09 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 02:58:47 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:48:51 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	fetch_env(t_env **envlist, char **env)
 	{
 		arg = ft_split(env[i], '=');
 		if (arg)
-			add_node(envlist, new_node(ft_strdup(arg[0]), ft_strdup(arg[1]), i));
+			add_node(envlist, new_node(ft_strdup(arg[0]), \
+			ft_strdup(arg[1]), i));
 		free_double(arg);
 		i++;
 	}
