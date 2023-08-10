@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 06:16:53 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 08:01:46 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	handle_append_redirection(t_cmd *data, t_file *file, int *fd_app)
 		data->type = file->type;
 		if (*fd_app != -1)
 			close(*fd_app);
-		*fd_app = open(file->name, O_APPEND | O_CREAT | O_RDWR);
+		*fd_app = open(file->name, O_APPEND | O_CREAT | O_RDWR, 0664);
 		if (*fd_app == -1)
 		{
 			_print(2, "minishell: ");

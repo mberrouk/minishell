@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 05:52:00 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 08:11:46 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,17 @@ void	manage_fd(t_exec *fd, t_cmd *data, int *pip)
 {
 	if (fd->fd_oup > 1)
 	{
-		close(pip[1]);
+		if (pip[1] > 1)
+			close(pip[1]);
 		pip[1] = fd->fd_oup;
 	}
 	if (data->type == APPEND_RE)
 	{
 		if (fd->fd_oup != 1)
 			close(fd->fd_oup);
-		fd->fd_oup = fd->fd_app;
+		if (pip[1] > 1)
+			close(pip[1]);
+		pip[1] = fd->fd_app;
 	}
 	if (data->input > 0)
 	{
