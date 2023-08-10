@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 13:15:20 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:03:39 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	manage_fd(t_exec *fd, t_cmd *data, int *pip)
 	}
 }
 
-void	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds)
+int	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds)
 {
 	pid_t	pid;
 
@@ -101,7 +101,12 @@ void	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds)
 		han_buil_comnds(data, cmds, fd.path, fd.env);
 	}
 	else if (pid < 0)
-		puterr(NULL);
+	{
+		perror("Error");
+		g_info.exit_status = 1;
+		return (1);
+	}
+	return (0);
 }
 
 int	open_fd_file(t_cmd *data, int *fd_inp, int *fd_oup, int *fd_app)

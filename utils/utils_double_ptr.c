@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:09 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 04:18:24 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:57:47 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ char	**join_double(char **fir, char *last)
 	if (!new)
 	{
 		free_double(fir);
-		puterr("Error: ");
-		exit(errno);
+		perror("Error");
+		exit(1);
 	}
 	return (_dptr_copy(new, fir, last));
 }

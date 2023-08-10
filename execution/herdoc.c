@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:38:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 15:56:27 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 18:54:20 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	her_doc_loop(int *tab, char *delm, char **env)
 		{
 			if (line && *line && ft_strcmp(line, delm) == 0)
 			{
-				_print(2, "---> %s\n", line);
 				free(line);
 				break ;
 			}
@@ -52,8 +51,8 @@ void	her_doc_loop(int *tab, char *delm, char **env)
 			_print(tab[1], line);
 			_print(tab[1], "\n");
 		}
-		//if (line)
-		//	free(line);
+		if (line)
+			free(line);
 	}
 }
 

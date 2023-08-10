@@ -6,13 +6,38 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:32:14 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 05:25:14 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 20:48:16 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/fcntl.h>
 #include <unistd.h>
 #include "../include/shell.h"
+
+#include <dirent.h>
+
+void	chois_exit_s(char *arg)
+{
+	DIR		*dir;
+
+	if (errno == 2)
+	{
+		perror("minishell");
+		exit(127);
+	}
+	if (errno == 13)
+	{
+		dir = opendir(arg);
+		if (dir)
+			_print(2, "minishell: is a directory\n");
+		else
+		{
+			errno = 13;
+			perror("minishell");
+		}
+		exit(126);
+	}
+}
 
 int	builtin_status(char **str)
 {
@@ -37,20 +62,6 @@ void	not_found(char *parm)
 	write(STDERR_FILENO, ": command not found\n", 21);
 	free(parm);
 	exit(127);
-}
-
-void	puterr(char *str)
-{
-	if (str)
-	{
-		write(STDERR_FILENO, str, ft_strlen(str));
-		exit(g_info.exit_status);
-	}
-	else
-	{
-		perror("Error");
-		exit(g_info.exit_status);
-	}
 }
 
 char	**find_path(char **env)

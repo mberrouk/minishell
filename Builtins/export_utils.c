@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:53:31 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 04:56:32 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 20:05:03 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	checkk(char *key)
 
 int	err_msg_inden(char *av, char *par)
 {
-	_print(2, "minishell: %s: '%s' not a valid identifier\n", par, av);
+	_print(2, "1 minishell: %s: '%s' not a valid identifier\n", par, av);
 	g_info.exit_status = 1;
 	return (0);
 }

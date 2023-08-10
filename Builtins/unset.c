@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:24:30 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 18:09:59 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 20:10:09 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ void	ft_unset(t_env **env_list, char **av)
 		g_info.exit_status = 0;
 		return ;
 	}
-	check(env_list, av);
 	g_info.exit_status = 0;
+	check(env_list, av);
 }
