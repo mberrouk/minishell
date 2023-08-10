@@ -1,0 +1,12 @@
+Builtins
+Makefile
+execution
+include
+main.c
+minishell
+minishell.dSYM
+minishell_tester
+parsing
+s
+ultra_split.c
+utils
