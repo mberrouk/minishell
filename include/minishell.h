@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 02:57:16 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 04:26:18 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ typedef struct s_echo
 
 typedef struct s_file
 {
-	SymTok			type;
+	t_SymTok		type;
 	char			*name;
-	int				fd;			
+	int				fd;
 	struct s_file	*next;
 }	t_file;
 
 typedef struct s_cmd
 {
-	SymTok			type;
+	t_SymTok		type;
 	char			**cmd;
 	t_file			*file;
 	int				input;

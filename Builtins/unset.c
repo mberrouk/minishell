@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:24:30 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 03:51:00 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 04:27:51 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	special_char_check(char *av, char *par)
 		if (sp_at_end(av[i]))
 			return (err_msg_inden(av, par));
 		i++;
-	}	
+	}
 	return (1);
 }
 

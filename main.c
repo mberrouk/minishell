@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 02:52:28 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 04:23:22 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,9 @@ int	main(int ac, char *av[], char *env[])
 		if (!line)
 			return (errno);
 		add_history(line);
-		if (line && *line)
-		{
-			tmpenv = convert_env();
-			init_parse(&cmds, line, tmpenv);
-			exec_cmds(cmds, 0, tmpenv);
-		}
+		tmpenv = convert_env();
+		init_parse(&cmds, line, tmpenv);
+		exec_cmds(cmds, 0, tmpenv);
 		free(line);
 		free_double(tmpenv);
 		clean_parss(&cmds);

@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:28:56 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 03:46:02 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 04:28:34 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_lexer	*parse_lexer_data(t_cmd **head, t_lexer *ptr, t_cmd *cmd, char **env)
 {
-	t_cmd	*tmp;
-	SymTok	token;
+	t_cmd		*tmp;
+	t_SymTok	token;
 
 	tmp = cmd;
 	token = ptr->sym;

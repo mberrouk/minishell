@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 03:31:45 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 03:49:31 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 04:25:09 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	**add_simple_cmd(char **ttmp, t_lexer *ptr, t_cmd *tmp);
 
-t_file	*new_file(SymTok	type, char *name)
+t_file	*new_file(t_SymTok	type, char *name)
 {
 	t_file	*new;
 

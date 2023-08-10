@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:54:02 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 03:26:16 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 04:27:36 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	chhe(char *av, char *par)
 		if (sp_at_end(av[i]) && av[i] != '=' && av[i] != '+')
 			return (err_msg_inden(av, par));
 		i++;
-	}	
+	}
 	return (1);
 }
 

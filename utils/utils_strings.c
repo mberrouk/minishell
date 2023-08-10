@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:35:17 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 04:19:58 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 04:27:14 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ int	ft_strlcpy(char *dest, char *src, int dstsize)
 	dest[i] = '\0';
 	return (src_size);
 }
-
-
 
 char	*ft_strjoin(char *s1, char *s2)
 {

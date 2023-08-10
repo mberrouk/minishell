@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/10 04:24:19 by mberrouk          #+#    #+#             */
+/*   Updated: 2023/08/10 04:26:43 by mberrouk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEXER_H
 # define LEXER_H
 
@@ -11,14 +23,15 @@ typedef enum symbolicToken
 	APPEND_RE,
 	HERE_DOC,
 	SIMPLE_CMD
-}	SymTok;
+}	t_SymTok;
 
 typedef struct s_lexer
 {
-	SymTok			sym;
+	t_SymTok		sym;
 	char			*arg;
 	bool			squots;
 	bool			dquots;
 	struct s_lexer	*next;
 }	t_lexer;
+
 #endif
