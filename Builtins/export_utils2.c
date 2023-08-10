@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:22:17 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 01:56:11 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:27:01 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	print(t_env *env, t_env *tmp, int size)
 		{
 			if (tmp->index == size)
 			{
-				if (tmp->val && ft_strcmp(tmp->key, "_"))
+				if (tmp->val)
 					printf("declare -x %s=\"%s\"\n", tmp->key, tmp->val);
-				else if (ft_strcmp(tmp->key, "_"))
-					printf("declare -x %s%c\n", tmp->key, '\0');
+				else 
+					printf("declare -x %s\n", tmp->key);
 				size--;
 				break ;
 			}

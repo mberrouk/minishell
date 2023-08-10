@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 04:26:18 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:26:11 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ t_da	g_info;
 
 typedef struct s_at
 {
-	int				i;
-	int				sig;
-	size_t			r;
+	int							i;
+	int							sig;
+	unsigned long long			r;
 }	t_at;
 
 typedef struct s_echo

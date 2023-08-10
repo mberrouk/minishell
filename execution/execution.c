@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 08:01:46 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:54:36 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include "../include/shell.h"
 #include "../include/minishell.h"
+#include <dirent.h>
 
 int	handle_input_redirection(t_cmd *data, t_file *file, int *fd_inp)
 {
@@ -74,7 +75,8 @@ int	handle_append_redirection(t_cmd *data, t_file *file, int *fd_app)
 void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 {
 	char	*cmd;
-
+	DIR		*dir;
+	
 	if (cmds && *cmds && builtin_status(data->cmd) != -1)
 	{
 		builtins_main(&g_info.g_env, data);
@@ -91,15 +93,21 @@ void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 			not_found(cmds[0]);
 		if (execve(cmd, cmds, env) == -1)
 		{
-			perror("minishell");
 			if (errno == 2)
 				exit(127);
 			if (errno == 13)
+			{
+				dir = opendir(cmd);
+				if (dir)
+					_print(2, "is a directory\n");
+				else
+					perror("minishell");
 				exit(126);
+			}
 		}
 	}
-	//else
-	//	exit(0);
+	else
+		exit(g_info.exit_status);
 }
 
 void	setup_pipes(int ifd, int *pip)

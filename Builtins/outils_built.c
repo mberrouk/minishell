@@ -6,11 +6,12 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:15:37 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 07:44:53 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:44:56 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+void	err_exitmsg(char *av);
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -60,8 +61,8 @@ size_t	ft_atoi(const	char	*str)
 	if (str[vars.i])
 		return (-1);
 	if (vars.sig == 1 && vars.r > LONG_MAX)
-		return (SIZE_MAX);
-	if (vars.sig == -1 && vars.r - LONG_MAX > 1)
-		return (SIZE_MAX);
-	return (vars.r * vars.sig);
+		err_exitmsg((char *)str);
+	if (vars.sig * (long long)vars.r  < LONG_MIN)
+		err_exitmsg((char *)str);
+	return ((int)(vars.r * vars.sig));
 }
