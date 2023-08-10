@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 03:55:33 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 05:14:56 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 			not_found(cmds[0]);
 		if (execve(cmd, cmds, env) == -1)
 		{
-			puterr(NULL);
+			puterr("minishell:");
 			exit(g_info.exit_status);
 		}
 	}
