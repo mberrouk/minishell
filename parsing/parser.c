@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 03:31:45 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/09 01:29:11 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:16:24 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,25 @@ char	*handl_quots(char *arg)
 	return (handl_syntax(narg, arg, quots, n_qts));
 }
 
+char	**add_simple_cmd(char **ttmp, t_lexer *ptr, t_cmd *tmp)
+{
+	int i;
+
+	i = 0;
+	if (ttmp)
+	{
+		while (ttmp[i])
+		{
+			tmp ->cmd = join_double(tmp->cmd, ft_strdup(ttmp[i]));
+			i++;
+		}
+		free_double(ttmp);
+	}
+	else
+		tmp->cmd = join_double(tmp->cmd, ft_strdup(ptr->arg));
+	return (tmp->cmd);
+}
+
 t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env)
 {
 	char	**ttmp;
@@ -104,18 +123,6 @@ t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env)
 	if (ptr->sym != SIMPLE_CMD)
 		add_file(&(tmp->file), new_file(ptr->sym, ft_strdup(ptr->arg)));
 	else
-	{
-		if (ttmp)
-		{
-			while (ttmp[i])
-			{
-				tmp ->cmd = join_double(tmp->cmd, ft_strdup(ttmp[i]));
-				i++;
-			}
-			free_double(ttmp);
-		}
-		else
-			tmp->cmd = join_double(tmp->cmd, ft_strdup(ptr->arg));
-	}
+		tmp->cmd = add_simple_cmd(ttmp, ptr, tmp);
 	return (ptr->next);
 }

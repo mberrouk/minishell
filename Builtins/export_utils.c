@@ -3,22 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:53:31 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 02:53:53 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:24:16 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/shell.h"
 
-int	_export_errmsg(char *str)
-{
-	_print(2, "minishell: export: '%s' not a valid identifier\n", str[1]);
-	g_info.exit_status = 1;
-	return (0);
-}
+int	err_msg_inden(char *av, char *par);
 
 int	check_identifier(char *str, int i)
 {
@@ -42,7 +37,7 @@ int	check_identifier(char *str, int i)
 		}
 	}
 	if (error == 1)
-		return (_export_errmsg(str));
+		return (err_msg_inden(str, "export"));
 	return (1);
 }
 

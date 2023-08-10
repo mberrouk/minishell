@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   export4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:54:02 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 02:54:44 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:26:16 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/shell.h"
+
+int	get_key(t_env *temp, char *str);
+int	err_msg_inden(char *av, char *par);
 
 int	chhe(char *av, char *par)
 {
@@ -34,9 +37,9 @@ int	export_help(char **av, t_env *env, char *value, int i)
 	char	*key;
 	int		x;
 
-	if (chhe(av[i], "export") == 1)
+	key = cat_equals(av[i], &x, 0);
+	if (!key || (key && chhe(key, "export") == 1))
 	{
-		key = cat_equals(av[i], &x, 0);
 		if (key)
 			value = ft_substr(av[i], len_equal(av[i]) + 1,
 					ft_strlen(av[i]));
