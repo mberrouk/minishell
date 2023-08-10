@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:28:56 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 01:31:53 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:46:02 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,16 @@ int	check_token(t_lexer *ptr, t_lexer *data, t_cmd **cmd)
 	return (0);
 }
 
+t_cmd	*get_the_next(t_cmd **cmd, t_cmd *tmp)
+{
+	parser_lstadd_back(cmd, parser_lstnew(NULL));
+	if (tmp)
+		tmp = tmp->next;
+	else
+		tmp = *cmd;
+	return (tmp);
+}
+
 void	init_parse(t_cmd **cmd, char *line, char *env[])
 {
 	t_lexer	*data;
@@ -67,13 +77,7 @@ void	init_parse(t_cmd **cmd, char *line, char *env[])
 		if (check_token(ptr, data, cmd))
 			break ;
 		else
-		{
-			parser_lstadd_back(cmd, parser_lstnew(NULL));
-			if (tmp)
-				tmp = tmp->next;
-			else
-				tmp = *cmd;
-		}
+			tmp = get_the_next(cmd, tmp);
 		if (ptr->sym == PIPE)
 			ptr = ptr->next;
 		while (ptr && ptr->sym != PIPE)

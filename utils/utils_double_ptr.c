@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_double_ptr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:09 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/09 01:24:27 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:38:17 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,28 @@ int	double_len(char **ptr)
 	return (len);
 }
 
+char	**_dptr_copy(char **new, char **old, char *laststr)
+{
+	int	i;
+
+	i = 0;
+	while (old && old[i])
+	{
+		new[i] = ft_strdup(old[i]);
+		i++;
+	}
+	new[i] = ft_strdup(laststr);
+	free_double(old);
+	if (laststr)
+		free(laststr);
+	new[i + 1] = NULL;
+	return (new);
+}
+
 char	**join_double(char **fir, char *last)
 {
 	char	**new;
 	int		len;
-	int		i;
 
 	len = double_len(fir) + 1;
 	if (!len)
@@ -37,23 +54,8 @@ char	**join_double(char **fir, char *last)
 	if (!new)
 	{
 		free_double(fir);
-		_print(2, "malloc failure\n");
+		puterr("Error: ");
 		exit(errno);
 	}
-	i = 0;
-	while (fir && fir[i])
-	{
-		new[i] = ft_strdup(fir[i]);
-		if (!new[i])
-			return (0x00);
-		free(fir[i]);
-		i++;
-	}
-	new[i] = ft_strdup(last);
-	if (fir)
-		free(fir);
-	if (last)
-		free(last);
-	new[i + 1] = NULL;
-	return (new);
+	return (_dptr_copy(new, fir, last));
 }

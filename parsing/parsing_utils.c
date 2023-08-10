@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 05:56:26 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/08 18:54:40 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:40:21 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,23 @@ char	*get_var(char *var, char **env)
 	}
 	free(var);
 	return (value);
+}
+
+char	**add_simple_cmd(char **ttmp, t_lexer *ptr, t_cmd *tmp)
+{
+	int	i;
+
+	i = 0;
+	if (ttmp)
+	{
+		while (ttmp[i])
+		{
+			tmp ->cmd = join_double(tmp->cmd, ft_strdup(ttmp[i]));
+			i++;
+		}
+		free_double(ttmp);
+	}
+	else
+		tmp->cmd = join_double(tmp->cmd, ft_strdup(ptr->arg));
+	return (tmp->cmd);
 }

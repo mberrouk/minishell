@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:32:14 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 04:19:25 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 03:28:10 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**find_path(char **env)
 		{
 			paths = ft_split(&env[i][j], ':');
 			return (paths);
-		}		
+		}
 		i++;
 	}
 	return (NULL);
