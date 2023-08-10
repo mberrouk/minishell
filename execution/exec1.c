@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 04:25:32 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 02:57:16 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	cat_handle_sigint(int sig)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		//rl_replace_line("", 0);
 	}
 }
 
@@ -95,7 +94,7 @@ void	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds)
 		}
 		manage_fd(&fd, data, pip);
 		setup_pipes(fd.fd_inp, pip);
-		handle_builtin_commands(data, cmds, fd.path, fd.env);
+		han_buil_comnds(data, cmds, fd.path, fd.env);
 	}
 	else if (pid < 0)
 		puterr(NULL);

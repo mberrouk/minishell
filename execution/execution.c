@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 04:21:46 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 02:57:35 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	handle_append_redirection(t_cmd *data, t_file *file, int *fd_app)
 	return (0);
 }
 
-void	handle_builtin_commands(t_cmd *data, char **cmds, char **path, char **env)
+void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 {
 	char	*cmd;
 
@@ -108,7 +108,7 @@ void	setup_pipes(int ifd, int *pip)
 	if (ifd > 0)
 	{
 		if (dup2(ifd, STDIN_FILENO) == -1)
-		puterr("1: Error dup2\n");
+			puterr("1: Error dup2\n");
 	}
 	if (ifd == -1)
 		return ;

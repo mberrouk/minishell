@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:24:30 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 02:35:38 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 02:55:55 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	special_char_check(char *av, char *par)
 	while (av[i])
 	{
 		if (sp_at_end(av[i]))
-				return (err_msg_inden(av, par));
+			return (err_msg_inden(av, par));
 		i++;
 	}	
 	return (1);
@@ -67,8 +67,8 @@ void	check(t_env **env_list, char **av)
 	vars.current = *env_list;
 	while (av[vars.i])
 	{
-			if (special_char_check(av[vars.i], "unset") == 1)
-		find_and_remove(env_list, av[vars.i], vars);
+		if (special_char_check(av[vars.i], "unset") == 1)
+			find_and_remove(env_list, av[vars.i], vars);
 		vars.i++;
 		vars.prev = vars.current;
 		if (vars.current)
@@ -88,8 +88,6 @@ void	ft_unset(t_env **env_list, char **av)
 		g_info.exit_status = 0;
 		return ;
 	}
-	// else if (chhe(av, "unset") == -1)
-	// 	return ;
 	check(env_list, av);
 	g_info.exit_status = 0;
 }

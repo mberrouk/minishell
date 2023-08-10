@@ -6,7 +6,7 @@
 /*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 22:13:13 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 02:57:16 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int		handle_input_redirection(t_cmd *data, t_file *file, int *fd_inp);
 int		handle_output_redirection(t_cmd *data, t_file *file, int *fd_oup);
 int		handle_append_redirection(t_cmd *data, t_file *file, int *fd_app);
 char	*ft_access(char **paths, char *cmd);
-void	handle_builtin_commands(t_cmd *data, char **cmds, char **path, char **env);
+void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env);
 void	setup_pipes(int ifd, int *pip);
 void	open_doc(t_cmd *cmd, char **env);
 void	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds);
