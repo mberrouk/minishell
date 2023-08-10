@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:24:30 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 21:07:32 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/10 02:35:38 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,24 @@ void	find_and_remove(t_env **env_list, char *key, t_unset vars)
 	}
 }
 
+int	err_msg_inden(char *av, char *par);
+
+int	special_char_check(char *av, char *par)
+{
+	int	i;
+
+	i = 0;
+	if (check_sp_char(av[i]))
+		return (err_msg_inden(av, par));
+	while (av[i])
+	{
+		if (sp_at_end(av[i]))
+				return (err_msg_inden(av, par));
+		i++;
+	}	
+	return (1);
+}
+
 void	check(t_env **env_list, char **av)
 {
 	t_unset	vars;
@@ -47,14 +65,11 @@ void	check(t_env **env_list, char **av)
 	vars.i = 1;
 	vars.prev = NULL;
 	vars.current = *env_list;
-	while (vars.current)
+	while (av[vars.i])
 	{
-		while (av[vars.i])
-		{
-			find_and_remove(env_list, av[vars.i], vars);
-			vars.i++;
-		}
-		vars.i = 1;
+			if (special_char_check(av[vars.i], "unset") == 1)
+		find_and_remove(env_list, av[vars.i], vars);
+		vars.i++;
 		vars.prev = vars.current;
 		if (vars.current)
 			vars.current = vars.current->next;
