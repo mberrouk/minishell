@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:22:14 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 03:24:09 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 18:02:19 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_cd(t_env **env_list, char **new_dir_path)
 	if (ft_strcmp(*new_dir_path, "cd") == 0 && !(new_dir_path[1]))
 	{
 		output = searching_key(*env_list, "HOME");
-		if (output == NULL)
+		if (output == NULL || !output->val)
 		{
 			_print(2, "minishell: cd: HOME not set\n");
 			g_info.exit_status = 1;

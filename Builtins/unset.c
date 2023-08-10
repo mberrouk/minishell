@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:24:30 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 04:27:51 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/10 18:09:59 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	find_and_remove(t_env **env_list, char *key, t_unset vars)
 			else
 			{
 				*env_list = vars.current->next;
+				free_env(vars.current);
 				vars.current = *env_list;
 			}
 		}
