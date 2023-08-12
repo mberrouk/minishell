@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:24:30 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 20:10:09 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:38:44 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	find_and_remove(t_env **env_list, char *key, t_unset vars)
 	vars.current = *env_list;
 	while (vars.current)
 	{
-		if (strcmp(key, vars.current->key) == 0)
+		if (ft_strcmp(key, vars.current->key) == 0)
 		{
 			if (vars.prev)
 			{
