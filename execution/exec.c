@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/12 20:40:28 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/12 22:23:55 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int	execute_commands(t_cmd *data, int fd_inp, char **path, char **env)
 			return (1);
 		}
 		fd.fd_inp = pip_fds[0];
+		if (data->input > 0)
+			close(data->input);
 		data = data->next;
 	}
-	if (fd.fd_inp != 0)
-		close(fd.fd_inp);
 	return (0);
 }
 

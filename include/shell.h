@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:25 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/12 05:45:31 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 22:58:19 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ char	**ultra_split(char *str, char *charset);
  */
 void	count_herdoc(t_file *file);
 void	wait_child(pid_t pid, t_cmd *data, int *tab);
+int		fork_err(t_exec fd, int *pip);
 
 /**
  * main_sign.c
