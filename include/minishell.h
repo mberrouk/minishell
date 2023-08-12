@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 21:54:10 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 02:59:02 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ int		handle_append_redirection(t_cmd *data, t_file *file, int *fd_app);
 char	*ft_access(char **paths, char *cmd);
 void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env);
 void	setup_pipes(int ifd, int *pip);
-void	open_doc(t_cmd *cmd, char **env);
-int	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds);
+int		open_doc(t_cmd *cmd, char **env);
+int		execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds);
 int		open_fd_file(t_cmd *data, int *fd_inp, int *fd_oup, int *fd_app);
 void	cd_3(t_env **env_list, char **cmds);
 int		ft_isalpha(int c);

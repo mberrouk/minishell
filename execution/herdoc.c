@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:38:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 23:36:08 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/12 03:03:12 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void	handle_doc_sigint(int signal)
 {
 	(void)signal;
+	write(STDIN_FILENO, "\n", 1);
 	exit(1);
 }
 
@@ -33,25 +34,22 @@ void	her_doc_loop(int *tab, char *delm, char **env)
 	while (1)
 	{
 		line = readline("> ");
-		if ((!*line && !*delm) || (line && *line && ft_strcmp(line, delm) == 0))
+		if (!line || (!*line && !*delm) || (line && *line && ft_strcmp(line, delm) == 0))
 			break ;
-		if (line && *line)
-		{
-			line = expan_in_dquots(line, env);
-			_print(tab[1], line);
-			_print(tab[1], "\n");
-		}
-		if (line)
-			free(line);
+		line = expan_in_dquots(line, env);
+		_print(tab[1], line);
+		_print(tab[1], "\n");
+		free(line);
 	}
 	if (line)
 		free(line);
 }
 
-void	handle_append_herdoc(t_cmd *data, char *delm, char **env)
+int	handle_append_herdoc(t_cmd *data, char *delm, char **env)
 {
 	pid_t	pid;
 	int		tab[2];
+	int		status;
 
 	pipe(tab);
 	pid = fork();
@@ -67,15 +65,22 @@ void	handle_append_herdoc(t_cmd *data, char *delm, char **env)
 	}
 	else
 	{
-		while (wait(0) > 0);
+		waitpid(pid, &(status), 0);
+		if (WIFEXITED(status))
+		{
+			g_info.exit_status = WEXITSTATUS(status);
+		}
+		else if (WIFSIGNALED(status)) 
+            g_info.exit_status = WTERMSIG(status) + 128;
 		close(tab[1]);
 		if (data->input > 0)
 			close(data->input);
 		data->input = tab[0];
 	}
+	return (g_info.exit_status);
 }
 
-void	open_doc(t_cmd *cmd, char **env)
+int	open_doc(t_cmd *cmd, char **env)
 {
 	t_file	*file;
 
@@ -90,9 +95,11 @@ void	open_doc(t_cmd *cmd, char **env)
 				cmd->input = -1;
 			}
 			else if (file->type == HERE_DOC)
-				handle_append_herdoc(cmd, file->name, env);
+				if(handle_append_herdoc(cmd, file->name, env))
+					return (1);
 			file = file->next;
 		}
 		cmd = cmd->next;
 	}
+	return (0);
 }

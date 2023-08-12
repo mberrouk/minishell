@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 22:08:36 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 02:58:47 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,9 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 		builtins_main(&g_info.g_env, data);
 	else
 	{
+		if (open_doc(data, env))
+			return ;
 		path = find_path(env);
-		open_doc(data, env);
 		drp = execute_commands(data, 0, path, env);
 		while (data)
 		{
