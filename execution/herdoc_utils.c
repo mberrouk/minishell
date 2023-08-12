@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 05:08:50 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/12 05:41:04 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 06:33:14 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	count_herdoc(t_file *file)
 			_print(2, "minishell: maximum here-document count exceeded\n");
 			exit(2);
 		}
-        file = file->next;
+		file = file->next;
 	}
 }
 

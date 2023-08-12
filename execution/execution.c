@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/12 06:04:13 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 06:33:36 by hoakoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 
 	if (data->input > 0)
 		close(data->input);
-
 	if (cmds && *cmds && builtin_status(data->cmd) != -1)
 	{
 		builtins_main(&g_info.g_env, data);
