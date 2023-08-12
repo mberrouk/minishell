@@ -6,11 +6,24 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:28:56 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 14:25:57 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 05:37:04 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
+
+void	hold_args2(t_lexer *ptr, t_cmd *tmp, char **ttmp, int drp)
+{
+	if (ptr->sym != SIMPLE_CMD)
+	{
+		if ((ttmp && ttmp[1]) || ((!drp) && !*(ptr->arg)))
+			add_file(&(tmp->file), new_file(ptr->sym, ft_strdup(ptr->arg), 1));
+		else
+			add_file(&(tmp->file), new_file(ptr->sym, ft_strdup(ptr->arg), 0));
+	}
+	else
+		tmp->cmd = add_simple_cmd(ttmp, ptr, tmp);
+}
 
 t_lexer	*parse_lexer_data(t_cmd **head, t_lexer *ptr, t_cmd *cmd, char **env)
 {

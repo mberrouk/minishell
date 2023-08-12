@@ -6,7 +6,7 @@
 #    By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:24:19 by mberrouk          #+#    #+#              #
-#    Updated: 2023/08/12 02:15:18 by mberrouk         ###   ########.fr        #
+#    Updated: 2023/08/12 05:32:59 by mberrouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS =  utils/ft_split.c utils/linked_list_utils.c utils/utils_double_ptr.c util
 		Builtins/builtins.c Builtins/pwd.c Builtins/env.c Builtins/echo.c Builtins/exit.c  execution/exec_utils.c Builtins/export_utils3.c  \
 		Builtins/outils_built.c  Builtins/cd.c Builtins/outils_buit1.c Builtins/outils_buils2.c Builtins/export.c execution/herdoc.c\
 		execution/exec1.c  Builtins/export_utils.c Builtins/export_utils1.c  Builtins/export_utils2.c ultra_split.c parsing/parser_utils.c \
-		Builtins/cd_1.c Builtins/unset.c Builtins/export4.c
+		Builtins/cd_1.c Builtins/unset.c Builtins/export4.c main_sign.c execution/herdoc_utils.c
 
 OBJ = ${SRCS:%.c=%.o}
 

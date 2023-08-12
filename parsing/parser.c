@@ -6,15 +6,13 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 03:31:45 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 14:42:54 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 05:45:06 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
-char	**add_simple_cmd(char **ttmp, t_lexer *ptr, t_cmd *tmp);
-
-t_file	*new_file(t_SymTok	type, char *name)
+t_file	*new_file(t_SymTok	type, char *name, int cases)
 {
 	t_file	*new;
 
@@ -25,6 +23,7 @@ t_file	*new_file(t_SymTok	type, char *name)
 	new->next = NULL;
 	new->name = name;
 	new->type = type;
+	new->cases = cases;
 	return (new);
 }
 
@@ -88,27 +87,25 @@ char	*handl_quots(char *arg)
 t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env)
 {
 	char	**ttmp;
+	int		drp;
 
+	drp = 0;
 	ttmp = NULL;
 	if (ptr->sym != HERE_DOC && ft_strchr(ptr->arg, '$'))
 		ptr->arg = pars_arg_expan(ptr->arg, env);
-	if (check_quots(ptr->arg))
+	if (ptr->arg && *ptr->arg && check_quots(ptr->arg))
+	{	
 		ptr->arg = handl_quots(ptr->arg);
-	else
-	{
-		ttmp = ultra_split(ptr->arg, " \t\n\r");
+		drp = 1;
 	}
+	else
+		ttmp = ultra_split(ptr->arg, " \t\n\r");
 	if (!(ptr->arg))
 	{
 		clean_parss(head);
 		return (0x00);
 	}
-	if (ptr->sym != SIMPLE_CMD)
-	{
-		add_file(&(tmp->file), new_file(ptr->sym, ft_strdup(ptr->arg)));
-	}
-	else
-		tmp->cmd = add_simple_cmd(ttmp, ptr, tmp);
+	hold_args2(ptr, tmp, ttmp, drp);
 	if (ttmp)
 		free_double(ttmp);
 	return (ptr->next);

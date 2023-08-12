@@ -6,11 +6,10 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 00:38:11 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/12 03:03:12 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 05:27:50 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/fcntl.h>
 #include "../include/shell.h"
 
 void	handle_doc_sigint(int signal)
@@ -34,7 +33,8 @@ void	her_doc_loop(int *tab, char *delm, char **env)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || (!*line && !*delm) || (line && *line && ft_strcmp(line, delm) == 0))
+		if ((line && *line && ft_strcmp(line, delm) == 0)
+			|| !line || (!*line && !*delm))
 			break ;
 		line = expan_in_dquots(line, env);
 		_print(tab[1], line);
@@ -49,7 +49,6 @@ int	handle_append_herdoc(t_cmd *data, char *delm, char **env)
 {
 	pid_t	pid;
 	int		tab[2];
-	int		status;
 
 	pipe(tab);
 	pid = fork();
@@ -64,19 +63,7 @@ int	handle_append_herdoc(t_cmd *data, char *delm, char **env)
 		exit(0);
 	}
 	else
-	{
-		waitpid(pid, &(status), 0);
-		if (WIFEXITED(status))
-		{
-			g_info.exit_status = WEXITSTATUS(status);
-		}
-		else if (WIFSIGNALED(status)) 
-            g_info.exit_status = WTERMSIG(status) + 128;
-		close(tab[1]);
-		if (data->input > 0)
-			close(data->input);
-		data->input = tab[0];
-	}
+		wait_child(pid, data, tab);
 	return (g_info.exit_status);
 }
 
@@ -84,6 +71,7 @@ int	open_doc(t_cmd *cmd, char **env)
 {
 	t_file	*file;
 
+	count_herdoc(cmd->file);
 	while (cmd)
 	{
 		file = cmd->file;
@@ -95,7 +83,7 @@ int	open_doc(t_cmd *cmd, char **env)
 				cmd->input = -1;
 			}
 			else if (file->type == HERE_DOC)
-				if(handle_append_herdoc(cmd, file->name, env))
+				if (handle_append_herdoc(cmd, file->name, env))
 					return (1);
 			file = file->next;
 		}

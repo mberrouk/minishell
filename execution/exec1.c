@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 23:07:17 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/12 05:56:12 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,12 @@ int	execute_command(t_exec fd, int *pip, t_cmd *data, char **cmds)
 	}
 	else if (data->pid < 0)
 	{
-		perror("Error");
+		perror("minishell: fork");
 		g_info.exit_status = 1;
+		if (fd.fd_inp > 0)
+			close(fd.fd_inp);
+		if (fd.fd_oup > 0)
+			close(fd.fd_oup);
 		return (1);
 	}
 	return (0);

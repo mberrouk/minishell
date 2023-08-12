@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/12 02:58:47 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 05:16:22 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	execute_commands(t_cmd *data, int fd_inp, char **path, char **env)
 	return (0);
 }
 
-
 int	size_cmds(t_cmd *cmds)
 {
 	int	i;
@@ -82,6 +81,22 @@ int	size_cmds(t_cmd *cmds)
 		cmds = cmds->next;
 	}
 	return (i);
+}
+
+void	ft_wait(t_cmd *data, int status, int drp)
+{
+	while (data)
+	{
+		waitpid(data->pid, &status, 0);
+		data = data->next;
+	}
+	if (WIFEXITED(status))
+	{
+		if (!drp)
+			g_info.exit_status = WEXITSTATUS(status);
+	}
+	else if (WIFSIGNALED(status))
+		g_info.exit_status = WTERMSIG(status) + 128;
 }
 
 void	exec_cmds(t_cmd *data, int status, char **env)
@@ -101,17 +116,7 @@ void	exec_cmds(t_cmd *data, int status, char **env)
 			return ;
 		path = find_path(env);
 		drp = execute_commands(data, 0, path, env);
-		while (data)
-		{
-			waitpid(data->pid, &status, 0);
-			data = data->next;
-		}
-		if (WIFEXITED(status))
-		{	if (!drp)
-				g_info.exit_status = WEXITSTATUS(status);
-		}
-		else if (WIFSIGNALED(status)) 
-            g_info.exit_status = WTERMSIG(status) + 128;
+		ft_wait(data, status, drp);
 		free_double(path);
 	}
 }

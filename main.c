@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/12 02:36:30 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 05:27:18 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,24 @@ int	env_lenn(t_cmd *env)
 	return (len);
 }
 
-void	sigint(int sig)
+void	continue_loop(char *line, t_cmd **cmds)
 {
-	if (sig == SIGINT)
-		{
-		g_info.exit_status = 1;
-		write(1, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		 rl_redisplay();
-		}
-}
+	char	**tmpenv;
 
-void	signals(void)
-{
-	signal(SIGINT, sigint);
-	signal(SIGQUIT, SIG_IGN);
+	tmpenv = NULL;
+	add_history(line);
+	tmpenv = convert_env();
+	init_parse(cmds, line, tmpenv);
+	exec_cmds(*cmds, 0, tmpenv);
+	free(line);
+	free_double(tmpenv);
+	clean_parss(cmds);
 }
 
 int	main(int ac, char *av[], char *env[])
 {
 	t_cmd	*cmds;
 	char	*line;
-	char	**tmpenv;
 
 	(void)av;
 	if (ac != 1)
@@ -83,17 +78,10 @@ int	main(int ac, char *av[], char *env[])
 	while (1)
 	{
 		signals();
-		tmpenv = NULL;
 		line = readline("\033[1;34mminishell$  \033[1;0m");
 		if (!line)
 			return (g_info.exit_status);
-		add_history(line);
-		tmpenv = convert_env();
-		init_parse(&cmds, line, tmpenv);
-		exec_cmds(cmds, 0, tmpenv);
-		free(line);
-		free_double(tmpenv);
-		clean_parss(&cmds);
+		continue_loop(line, &cmds);
 	}
 	return (g_info.exit_status);
 }

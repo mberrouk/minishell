@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:22:17 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 11:27:01 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 04:40:50 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	print(t_env *env, t_env *tmp, int size)
 			{
 				if (tmp->val)
 					printf("declare -x %s=\"%s\"\n", tmp->key, tmp->val);
-				else 
+				else
 					printf("declare -x %s\n", tmp->key);
 				size--;
 				break ;

@@ -6,17 +6,11 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:25:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 20:46:25 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 06:04:13 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/fcntl.h>
-#include <unistd.h>
 #include "../include/shell.h"
-#include "../include/minishell.h"
-
-
-void	chois_exit_s(char *arg);
 
 int	handle_input_redirection(t_cmd *data, t_file *file, int *fd_inp)
 {
@@ -25,11 +19,12 @@ int	handle_input_redirection(t_cmd *data, t_file *file, int *fd_inp)
 	{
 		if (*fd_inp != 0)
 			close(*fd_inp);
-		*fd_inp = open(file->name, O_RDONLY);
-		if (*fd_inp == -1 || !file->name)
+		if (!file->cases)
+			*fd_inp = open(file->name, O_RDONLY);
+		if (*fd_inp == -1 || file->cases)
 		{
 			_print(2, "minishell: ");
-			if (!file->name || !*file->name)
+			if (file->cases)
 				_print(2, "ambiguous redirect\n");
 			else
 				perror(file->name);
@@ -47,11 +42,12 @@ int	handle_output_redirection(t_cmd *data, t_file *file, int *fd_oup)
 		data->type = file->type;
 		if (*fd_oup != 1)
 			close(*fd_oup);
-		*fd_oup = open(file->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (*fd_oup == -1)
+		if (!file->cases)
+			*fd_oup = open(file->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (*fd_oup == -1 || file->cases)
 		{
 			_print(2, "minishell: ");
-			if (!file->name || !*file->name)
+			if (file->cases)
 				_print(2, "ambiguous redirect\n");
 			else
 				perror(file->name);
@@ -69,11 +65,12 @@ int	handle_append_redirection(t_cmd *data, t_file *file, int *fd_app)
 		data->type = file->type;
 		if (*fd_app != -1)
 			close(*fd_app);
-		*fd_app = open(file->name, O_APPEND | O_CREAT | O_RDWR, 0664);
-		if (*fd_app == -1)
+		if (!file->cases)
+			*fd_app = open(file->name, O_APPEND | O_CREAT | O_RDWR, 0664);
+		if (*fd_app == -1 || file->cases)
 		{
 			_print(2, "minishell: ");
-			if (!file->name || !*file->name)
+			if (file->cases)
 				_print(2, "ambiguous redirect\n");
 			else
 				perror(file->name);
@@ -84,11 +81,12 @@ int	handle_append_redirection(t_cmd *data, t_file *file, int *fd_app)
 	return (0);
 }
 
-
 void	han_buil_comnds(t_cmd *data, char **cmds, char **path, char **env)
 {
 	char	*cmd;
 
+	if (data->input > 0)
+		close(data->input);
 
 	if (cmds && *cmds && builtin_status(data->cmd) != -1)
 	{

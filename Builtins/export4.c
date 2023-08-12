@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:54:02 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 15:02:35 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 04:40:32 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	export_help(char **av, t_env *env, char *value, int i)
 
 	x = 0;
 	key = cat_equals(av[i], &x, 0);
-	if ((!key && chhe(av[i], "export") == 1) 
+	if ((!key && chhe(av[i], "export") == 1)
 		|| (key && chhe(key, "export") == 1))
 	{
 		if (key)

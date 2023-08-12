@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:25 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/09 01:57:33 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/12 05:45:31 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
 # define SHELL_H
 
+# include <limits.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
 # include <errno.h>
+# include <sys/fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -44,6 +47,8 @@ void	lexical_analysis(char *line, t_lexer **lst);
  * parser.c
  */
 void	init_parse(t_cmd **cmd, char *line, char *env[]);
+void	add_file(t_file **file_area, t_file *file);
+t_file	*new_file(t_SymTok	type, char *name, int cases);
 
 /**
  * exec_test.c
@@ -111,6 +116,8 @@ char	*expan_in_dquots(char *arg, char **env);
 /**
  * parsing_utils.c
  */
+void	hold_args2(t_lexer *ptr, t_cmd *tmp, char **ttmp, int drp);
+char	**add_simple_cmd(char **ttmp, t_lexer *ptr, t_cmd *tmp);
 int		len_to_spchar(char *arg);
 int		skip_char(char *str, char c);
 int		len_at_char(char *str, char c);
@@ -151,4 +158,22 @@ void	clean_parss(t_cmd **cmd);
 void	clean_lexer(t_lexer *data);
 int		skip_dollar(char **value, char *arg);
 char	**ultra_split(char *str, char *charset);
+
+/**
+ * herdoc_utils.c
+ */
+void	count_herdoc(t_file *file);
+void	wait_child(pid_t pid, t_cmd *data, int *tab);
+
+/**
+ * main_sign.c
+ */
+void	signals(void);
+void	sigint(int sig);
+
+/**
+ * exec_utils.c
+ */
+void	chois_exit_s(char *arg);
+
 #endif

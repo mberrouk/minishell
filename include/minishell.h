@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 01:39:10 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/12 02:59:02 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 05:33:49 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_file
 	t_SymTok		type;
 	char			*name;
 	int				fd;
+	int				cases;
 	struct s_file	*next;
 }	t_file;
 
@@ -144,4 +145,6 @@ t_lexer	*hold_args(t_cmd **head, t_lexer *ptr, t_cmd *tmp, char **env);
 int		old_erreur(t_env *s, int flag);
 void	cd__(t_env **env_list, char **new_dir_path);
 int		chhe(char *av, char *par);
+void	err_exitmsg(char *av);
+
 #endif 
