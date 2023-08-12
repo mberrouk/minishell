@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/10 23:05:18 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/12 02:11:58 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int ac, char *av[], char *env[])
 		tmpenv = NULL;
 		line = readline("\033[1;34mminishell$  \033[1;0m");
 		if (!line)
-			return (errno);
+			return (g_info.exit_status);
 		add_history(line);
 		tmpenv = convert_env();
 		init_parse(&cmds, line, tmpenv);
@@ -95,4 +95,5 @@ int	main(int ac, char *av[], char *env[])
 		free_double(tmpenv);
 		clean_parss(&cmds);
 	}
+	return (g_info.exit_status);
 }

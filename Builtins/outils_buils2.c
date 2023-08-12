@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:29:44 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/09 03:18:01 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 01:50:03 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ void	set_oldpwd(t_env **envlist, char *dir)
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->key, "OLDPWD") == 0)
-			break ;
+		{
+			free(tmp->val);
+			tmp->val = fstrdup(dir);
+			return ;
+		}
 		tmp = tmp->next;
 	}
-	free(tmp->val);
-	tmp->val = fstrdup(dir);
+	envadd_back(envlist, env_new(ft_strdup("OLDPWD"), ft_strdup(dir)));
 }
 
 void	set_pwd(t_env **envlist, char *dir)
@@ -47,9 +50,12 @@ void	set_pwd(t_env **envlist, char *dir)
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->key, "PWD") == 0)
-			break ;
+		{
+			free(tmp->val);
+			tmp->val = fstrdup(dir);
+			return ;
+		}
 		tmp = tmp->next;
 	}
-	free(tmp->val);
-	tmp->val = fstrdup(dir);
+	envadd_back(envlist, env_new(ft_strdup("PWD"), ft_strdup(dir)));
 }

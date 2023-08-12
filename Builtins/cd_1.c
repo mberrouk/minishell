@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:52:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/10 02:52:49 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/12 01:26:49 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	cd__(t_env **env_list, char **new_dir_path)
 	t_env	*output;
 	char	*pwd;
 
-	if (*new_dir_path != NULL && (strncmp(*new_dir_path, "-", 2) == 0))
+	if (*new_dir_path != NULL && (ft_strncmp(*new_dir_path, "-", 2) == 0))
 	{
 		output = searching_key(*env_list, "OLDPWD");
 		if (!output->val)
