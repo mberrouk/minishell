@@ -6,11 +6,11 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:33:08 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/08 23:06:03 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 23:49:36 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "../include/shell.h"
 
 int	is_charest(char c, char *charest)
 {

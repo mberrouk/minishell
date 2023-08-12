@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:24:16 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/12 20:44:55 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/12 23:26:41 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	continue_loop(char *line, t_cmd **cmds)
 	char	**tmpenv;
 
 	tmpenv = NULL;
-	add_history(line);
 	tmpenv = convert_env();
 	init_parse(cmds, line, tmpenv);
 	exec_cmds(*cmds, 0, tmpenv);

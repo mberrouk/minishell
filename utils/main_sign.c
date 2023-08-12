@@ -6,11 +6,11 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 04:38:17 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/12 05:34:31 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 23:32:05 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/shell.h"
+#include "../include/shell.h"
 
 void	sigint(int sig)
 {

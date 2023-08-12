@@ -6,7 +6,7 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 01:28:56 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/12 22:21:34 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 23:52:29 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	init_parse(t_cmd **cmd, char *line, char *env[])
 	data = NULL;
 	if (!line || !line[skip_withespace(line, 0)])
 		return ;
+	add_history(line);
 	lexical_analysis(line, &data);
 	ptr = data;
 	tmp = NULL;

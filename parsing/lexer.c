@@ -6,11 +6,10 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:22:38 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/08/09 00:07:23 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/12 23:32:57 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/lexer.h"
 #include "../include/shell.h"
 
 int	symbol_case(char *line, t_lexer *ptr)
