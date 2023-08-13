@@ -6,12 +6,10 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:15:47 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/12 22:23:55 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/08/13 00:48:05 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/fcntl.h>
-#include <unistd.h>
 #include "../include/shell.h"
 #include "../include/minishell.h"
 

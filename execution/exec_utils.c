@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:32:14 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/12 20:40:02 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/13 00:56:13 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/fcntl.h>
-#include <unistd.h>
-#include "../include/shell.h"
-
 #include <dirent.h>
+#include "../include/shell.h"
 
 void	chois_exit_s(char *arg)
 {

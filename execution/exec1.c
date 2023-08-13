@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   exec1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoakoumi <hoakoumi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:27:46 by hoakoumi          #+#    #+#             */
-/*   Updated: 2023/08/12 23:59:46 by hoakoumi         ###   ########.fr       */
+/*   Updated: 2023/08/13 00:48:09 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/fcntl.h>
-#include <unistd.h>
 #include "../include/shell.h"
 #include "../include/minishell.h"
 
